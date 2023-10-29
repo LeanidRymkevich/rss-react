@@ -1,11 +1,12 @@
-import React from 'react';
-import 'src/styles.scss';
-import { getArticles } from './utils/APIWorking/APIWorking';
+import { Component } from 'react';
+import Main from 'src/pages/main/Main';
 
-export default class App extends React.Component {
-  render() {
-    return <div className="hello">Hello, World!</div>;
+export default class App extends Component {
+  render(): JSX.Element {
+    return (
+      <>
+        <Main />
+      </>
+    );
   }
 }
-
-console.log(getArticles('red flower', 3));
