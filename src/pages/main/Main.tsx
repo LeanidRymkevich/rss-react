@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import Button from 'src/components/button/Button';
-import Input from 'src/components/input/Input';
+import Button from 'src/components/UI/button/Button';
+import Input from 'src/components/UI/input/Input';
 import { MainState } from 'src/pages/main/types';
 import {
   getQueryFromStorage,
