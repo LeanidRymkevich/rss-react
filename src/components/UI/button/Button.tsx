@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ButtonProps } from 'src/components/UI/button/types';
+import { ButtonProps } from 'src/components/UI/Button/types';
 
 export default class Button extends Component<ButtonProps> {
   render(): JSX.Element {

@@ -1,4 +1,4 @@
-import { BtnClickHandler } from 'src/components/UI/button/types';
+import { BtnClickHandler } from 'src/components/UI/Button/types';
 
 export interface SearchProps {
   wrapperClass?: string;

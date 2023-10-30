@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { InputProps } from 'src/components/UI/input/types';
+import { InputProps } from 'src/components/UI/Input/types';
 
 export default class Input extends Component<InputProps> {
   render(): JSX.Element {

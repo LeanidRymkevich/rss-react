@@ -4,6 +4,11 @@
   max-width: 980px;
 }
 
+.title {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
+
 .search_wrapper {
   width: 100%;
   display: flex;
@@ -18,14 +23,20 @@
 
 .input {
   flex-grow: 1;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
 }
 
 .btn {
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
 
   &:hover {
     cursor: pointer;
   }
 }
 
+.search_result_title {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+}

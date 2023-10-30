@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { SEARCH_BTN_TEXT, SearchProps } from 'src/components/search/types';
-import Input from 'src/components/UI/input/Input';
-import Button from 'src/components/UI/button/Button';
+import { SEARCH_BTN_TEXT, SearchProps } from 'src/components/Search/types';
+import Input from 'src/components/UI/Input/Input';
+import Button from 'src/components/UI/Button/Button';
 
 export default class Search extends Component<SearchProps> {
   render(): JSX.Element {
