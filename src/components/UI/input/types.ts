@@ -1,4 +1,5 @@
 export interface InputProps {
+  class?: string;
   type?: React.HTMLInputTypeAttribute;
   value?: string;
   placeholder?: string;

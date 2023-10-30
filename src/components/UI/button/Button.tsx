@@ -5,6 +5,7 @@ export default class Button extends Component<ButtonProps> {
   render(): JSX.Element {
     return (
       <button
+        className={this.props.class || ''}
         type={this.props.type || 'button'}
         onClick={this.props.onClickHandler}
       >
