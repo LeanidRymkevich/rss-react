@@ -1,8 +1,10 @@
+@import 'src/common_styles/variables.scss';
+
 .newsItem {
   display: flex;
   justify-content: space-between;
   font-size: 1.6rem;
-  border: 2px solid #21154b;
+  border: 2px solid $news-item-border-color;
   padding: 0.5rem;
 }
 

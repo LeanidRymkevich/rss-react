@@ -1,22 +1,24 @@
 import { Component } from 'react';
 import Button from 'src/components/UI/Button/Button';
 import Search from 'src/components/Search/Search';
+import { MainState } from 'src/pages/main/types';
 import {
   ERROR_BTN_TEXT,
-  MainState,
+  NO_RESULT_FOUND_RESPONSE,
   SEARCH_PLACEHOLDER,
   SEARCH_RESULT_TITLE_TEXT,
   TITLE,
-} from 'src/pages/main/types';
+} from 'src/pages/main/constants';
 import {
   getQueryFromStorage,
   setQueryToStorage,
 } from 'src/utils/StorageWorking/StorageWorking';
 import styles from 'src/pages/main/main.module.scss';
-import { getArticles } from 'src/utils/APIWorking/APIWorking';
 import NewsList from 'src/components/NewsList/NewsList';
-import { APIResponse, Article } from 'src/utils/APIWorking/types';
-import { NewsItemProps } from 'src/components/NewsItem/types';
+import {
+  doSearch,
+  getNewsItemProps,
+} from 'src/logic/MainPageLogic/MainPageLogic';
 
 export default class Main extends Component<unknown, MainState> {
   state = {
@@ -25,31 +27,14 @@ export default class Main extends Component<unknown, MainState> {
     total: 0,
   };
 
-  async componentDidMount(): Promise<void> {
+  componentDidMount = async (): Promise<void> => {
     const storageQuery: string = getQueryFromStorage();
-    const response: APIResponse = await getArticles(storageQuery || null);
-    const [totalItems, resultItems] = [
-      response.totalResults,
-      response.articles || [],
-    ];
-    this.setState({
-      query: storageQuery,
-      results: resultItems,
-      total: totalItems,
-    });
-  }
+    doSearch(this, storageQuery);
+  };
 
   onSearchBtnClick = async (): Promise<void> => {
     setQueryToStorage(this.state.query);
-    const response: APIResponse = await getArticles(this.state.query || null);
-    const [totalItems, resultItems] = [
-      response.totalResults,
-      response.articles || [],
-    ];
-    this.setState({
-      results: resultItems,
-      total: totalItems,
-    });
+    doSearch(this, this.state.query);
   };
 
   onSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -84,20 +69,9 @@ export default class Main extends Component<unknown, MainState> {
           {SEARCH_RESULT_TITLE_TEXT}
         </h2>
         {this.state.results.length !== 0 ? (
-          <NewsList
-            items={this.state.results.map(
-              (item: Article, idx: number): NewsItemProps => {
-                return {
-                  itemNum: `${idx + 1}`,
-                  description: item.description || 'none',
-                  publisher: item.source.name,
-                  author: item.author || 'none',
-                };
-              }
-            )}
-          />
+          <NewsList items={getNewsItemProps(this.state.results)} />
         ) : (
-          <p>There is no results on this request</p>
+          <p className={styles.no_results}>{NO_RESULT_FOUND_RESPONSE}</p>
         )}
       </div>
     );

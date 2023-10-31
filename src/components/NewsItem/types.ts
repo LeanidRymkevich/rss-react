@@ -4,5 +4,3 @@ export interface NewsItemProps {
   publisher: string;
   author: string;
 }
-
-export const LINK_TEXT = 'Learn more';
