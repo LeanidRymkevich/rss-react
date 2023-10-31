@@ -4,11 +4,15 @@
 }
 
 html {
-  font-size: 10px;
-  color: #f5f5f5;
+  font-size: calc(0.3vw + 0.5vh + 4px);
+  color: #063023;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 body {
-  background-color: #1d8768e0;
+  background-color: #21ac83cc;
+}
+
+#root {
+  width: 100%;
 }

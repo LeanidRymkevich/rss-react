@@ -1,0 +1,24 @@
+.newsItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  border: 2px solid #21154b;
+  padding: 0.5rem;
+}
+
+.newsItem__number {
+  text-align: center;
+  width: 4%;
+}
+
+.newsItem__content {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.newsItem__subtitle {
+  font-weight: 700;
+  font-style: italic;
+}
