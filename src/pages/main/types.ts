@@ -4,4 +4,5 @@ export interface MainState {
   query: string;
   results: Article[];
   total: number;
+  isNewsLoading: boolean;
 }

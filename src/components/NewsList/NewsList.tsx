@@ -6,7 +6,7 @@ import NewsItem from 'src/components/NewsItem/NewsItem';
 
 export default class NewsList extends Component<NewsListProps> {
   render(): JSX.Element {
-    return (
+    return this.props.items.length !== 0 ? (
       <ul className={styles.news_list}>
         {this.props.items.map((item: NewsItemProps): ReactNode => {
           return (
@@ -17,6 +17,8 @@ export default class NewsList extends Component<NewsListProps> {
           );
         })}
       </ul>
+    ) : (
+      <p className={styles.no_results}>{this.props.noDataMessage}</p>
     );
   }
 }

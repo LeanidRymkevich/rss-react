@@ -19,12 +19,14 @@ import {
   doSearch,
   getNewsItemProps,
 } from 'src/logic/MainPageLogic/MainPageLogic';
+import Loader from 'src/components/UI/Loader/Loader';
 
 export default class Main extends Component<unknown, MainState> {
   state = {
     query: '',
     results: [],
     total: 0,
+    isNewsLoading: false,
   };
 
   componentDidMount = async (): Promise<void> => {
@@ -68,10 +70,13 @@ export default class Main extends Component<unknown, MainState> {
         <h2 className={styles.search_result_title}>
           {SEARCH_RESULT_TITLE_TEXT}
         </h2>
-        {this.state.results.length !== 0 ? (
-          <NewsList items={getNewsItemProps(this.state.results)} />
+        {this.state.isNewsLoading ? (
+          <Loader />
         ) : (
-          <p className={styles.no_results}>{NO_RESULT_FOUND_RESPONSE}</p>
+          <NewsList
+            items={getNewsItemProps(this.state.results)}
+            noDataMessage={NO_RESULT_FOUND_RESPONSE}
+          />
         )}
       </div>
     );

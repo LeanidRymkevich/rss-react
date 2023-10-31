@@ -15,6 +15,7 @@ export function getNewsItemProps(articles: Article[]): NewsItemProps[] {
 }
 
 export async function doSearch(page: Main, query: string): Promise<void> {
+  page.setState({ isNewsLoading: true });
   const response: APIResponse = await getArticles(query || null);
   const [totalItems, resultItems] = [
     response.totalResults,
@@ -24,5 +25,6 @@ export async function doSearch(page: Main, query: string): Promise<void> {
     query: query,
     results: resultItems,
     total: totalItems,
+    isNewsLoading: false,
   });
 }
