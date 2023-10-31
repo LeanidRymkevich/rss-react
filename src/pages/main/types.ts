@@ -5,4 +5,5 @@ export interface MainState {
   results: Article[];
   total: number;
   isNewsLoading: boolean;
+  hasError: boolean;
 }

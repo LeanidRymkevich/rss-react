@@ -27,6 +27,7 @@ export default class Main extends Component<unknown, MainState> {
     results: [],
     total: 0,
     isNewsLoading: false,
+    hasError: false,
   };
 
   componentDidMount = async (): Promise<void> => {
@@ -44,10 +45,12 @@ export default class Main extends Component<unknown, MainState> {
   };
 
   onErrorBtnClick = (): void => {
-    throw new Error();
+    this.setState({ hasError: true });
   };
 
   render(): JSX.Element {
+    if (this.state.hasError) throw new Error();
+
     return (
       <div className={styles.main}>
         <h1 className={styles.title}>{TITLE}</h1>
