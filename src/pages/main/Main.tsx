@@ -22,7 +22,7 @@ import {
 import Loader from 'src/components/UI/Loader/Loader';
 
 export default class Main extends Component<unknown, MainState> {
-  state = {
+  public state = {
     query: '',
     results: [],
     total: 0,
@@ -30,25 +30,27 @@ export default class Main extends Component<unknown, MainState> {
     hasError: false,
   };
 
-  componentDidMount = async (): Promise<void> => {
+  public componentDidMount = async (): Promise<void> => {
     const storageQuery: string = getQueryFromStorage();
     doSearch(this, storageQuery);
   };
 
-  onSearchBtnClick = async (): Promise<void> => {
+  public onSearchBtnClick = async (): Promise<void> => {
     setQueryToStorage(this.state.query);
     doSearch(this, this.state.query);
   };
 
-  onSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  public onSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     this.setState({ query: event.target.value });
   };
 
-  onErrorBtnClick = (): void => {
+  public onErrorBtnClick = (): void => {
     this.setState({ hasError: true });
   };
 
-  render(): JSX.Element {
+  public render(): JSX.Element {
     if (this.state.hasError) throw new Error();
 
     return (

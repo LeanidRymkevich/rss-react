@@ -9,7 +9,7 @@ import {
 } from 'src/components/NewsItem/constants';
 
 export default class NewsItem extends Component<NewsItemProps> {
-  render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <li className={styles.newsItem}>
         <div className={styles.newsItem__number}>{this.props.itemNum}</div>

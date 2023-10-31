@@ -4,7 +4,7 @@ import Input from 'src/components/UI/Input/Input';
 import Button from 'src/components/UI/Button/Button';
 
 export default class Search extends Component<SearchProps> {
-  render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <div className={this.props.wrapperClass}>
         <Input

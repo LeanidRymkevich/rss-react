@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { ButtonProps } from 'src/components/UI/Button/types';
 
 export default class Button extends Component<ButtonProps> {
-  render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <button
         className={this.props.class || ''}

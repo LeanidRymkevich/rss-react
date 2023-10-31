@@ -4,7 +4,7 @@ import 'src/common_styles/common.scss';
 import ErrorBoundary from 'src/components/ErrorBoundary/ErrorBoundary';
 
 export default class App extends Component {
-  render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <ErrorBoundary>
         <Main />

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { InputProps } from 'src/components/UI/Input/types';
 
 export default class Input extends Component<InputProps> {
-  render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <input
         className={this.props.class || ''}
