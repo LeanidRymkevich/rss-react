@@ -1,8 +1,8 @@
 export interface ButtonProps {
-  class?: string;
+  className?: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
   text: string;
-  onClickHandler: BtnClickHandler;
+  onClick: BtnClickHandler;
 }
 
 export type BtnClickHandler = (

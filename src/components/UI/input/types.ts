@@ -1,7 +1,7 @@
 export interface InputProps {
-  class?: string;
+  className?: string;
   type?: React.HTMLInputTypeAttribute;
   value?: string;
   placeholder?: string;
-  onChangeHandler: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }

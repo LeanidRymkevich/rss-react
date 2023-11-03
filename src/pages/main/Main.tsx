@@ -1,14 +1,14 @@
 import { Component } from 'react';
 import Button from 'src/components/UI/Button/Button';
 import Search from 'src/components/Search/Search';
-import { MainState } from 'src/pages/main/types';
+import { MainState } from 'src/pages/Main/types';
 import {
   ERROR_BTN_TEXT,
   NO_RESULT_FOUND_RESPONSE,
   SEARCH_PLACEHOLDER,
   SEARCH_RESULT_TITLE_TEXT,
   TITLE,
-} from 'src/pages/main/constants';
+} from 'src/pages/Main/constants';
 import {
   getQueryFromStorage,
   setQueryToStorage,
@@ -67,9 +67,9 @@ export default class Main extends Component<unknown, MainState> {
             onClickHandler={this.onSearchBtnClick}
           />
           <Button
-            class={styles.btn}
+            className={styles.btn}
             text={ERROR_BTN_TEXT}
-            onClickHandler={this.onErrorBtnClick}
+            onClick={this.onErrorBtnClick}
           />
         </section>
         <h2 className={styles.search_result_title}>

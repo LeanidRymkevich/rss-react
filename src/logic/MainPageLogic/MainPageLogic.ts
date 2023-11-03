@@ -1,5 +1,5 @@
 import { NewsItemProps } from 'src/components/NewsItem/types';
-import Main from 'src/pages/main/Main';
+import Main from 'src/pages/Main/Main';
 import { getArticles } from 'src/utils/APIWorking/APIWorking';
 import { APIResponse, Article } from 'src/utils/APIWorking/types';
 

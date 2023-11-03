@@ -8,15 +8,15 @@ export default class Search extends Component<SearchProps> {
     return (
       <div className={this.props.wrapperClass}>
         <Input
-          class={this.props.inputClass}
+          className={this.props.inputClass}
           placeholder={this.props.placeholder}
           value={this.props.value}
-          onChangeHandler={this.props.onChangeHandler}
+          onChange={this.props.onChangeHandler}
         />
         <Button
-          class={this.props.btnClass}
+          className={this.props.btnClass}
           text={SEARCH_BTN_TEXT}
-          onClickHandler={this.props.onClickHandler}
+          onClick={this.props.onClickHandler}
         />
       </div>
     );
