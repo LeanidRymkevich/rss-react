@@ -4,7 +4,6 @@ import Search from 'src/components/Search/Search';
 import { MainState } from 'src/pages/Main/types';
 import {
   ERROR_BTN_TEXT,
-  NO_RESULT_FOUND_RESPONSE,
   SEARCH_PLACEHOLDER,
   SEARCH_RESULT_TITLE_TEXT,
   TITLE,
@@ -44,7 +43,6 @@ export default class Main extends Component<unknown, MainState> {
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     this.setState({ query: event.target.value });
-    console.log(this.state.query);
   };
 
   public onErrorBtnClick = (): void => {
@@ -81,10 +79,7 @@ export default class Main extends Component<unknown, MainState> {
         {this.state.isNewsLoading ? (
           <Loader />
         ) : (
-          <NewsList
-            items={getNewsItemProps(this.state.results)}
-            noDataMessage={NO_RESULT_FOUND_RESPONSE}
-          />
+          <NewsList items={getNewsItemProps(this.state.results)} />
         )}
       </div>
     );

@@ -20,7 +20,7 @@ import {
 import {
   AUTHOR_SUBTITLE,
   PUBLISHER_SUBTITLE,
-} from 'src/components/NewsItem/constants';
+} from 'src/components/NewsItem/NewsItem';
 
 const Details = (props: Article): ReactNode => {
   return (
