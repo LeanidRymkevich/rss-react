@@ -1,19 +1,19 @@
-import { Component } from 'react';
+import { ReactNode } from 'react';
 import Main from 'src/pages/Main/Main';
 import 'src/common_styles/common.scss';
 import Details from 'src/pages/Details/Details';
 import { Article } from './utils/APIWorking/types';
 
-export default class App extends Component {
-  public render(): JSX.Element {
-    return (
-      <div style={{ display: 'flex', width: '100%', gap: '1rem' }}>
-        <Main />
-        <Details {...test} />
-      </div>
-    );
-  }
-}
+const App = (): ReactNode => {
+  return (
+    <div style={{ display: 'flex', width: '100%', gap: '1rem' }}>
+      <Main />
+      <Details {...test} />
+    </div>
+  );
+};
+
+export default App;
 
 const test: Article = {
   source: {

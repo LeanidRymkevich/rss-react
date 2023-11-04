@@ -1,5 +1,5 @@
 import { NewsItemProps } from 'src/components/NewsItem/types';
-import Main from 'src/pages/Main/Main';
+import { MainState } from 'src/pages/Main/types';
 import { getArticles } from 'src/utils/APIWorking/APIWorking';
 import { APIResponse, Article } from 'src/utils/APIWorking/types';
 
@@ -14,14 +14,19 @@ export function getNewsItemProps(articles: Article[]): NewsItemProps[] {
   });
 }
 
-export async function doSearch(page: Main, query: string): Promise<void> {
-  page.setState({ isNewsLoading: true });
+export async function doSearch(
+  state: MainState,
+  setState: React.Dispatch<React.SetStateAction<MainState>>,
+  query: string
+): Promise<void> {
+  setState({ ...state, isNewsLoading: true });
   const response: APIResponse = await getArticles(query || null);
   const [totalItems, resultItems] = [
     response.totalResults,
     response.articles || [],
   ];
-  page.setState({
+  setState({
+    ...state,
     query: query,
     results: resultItems,
     total: totalItems,
