@@ -44,6 +44,7 @@ export default class Main extends Component<unknown, MainState> {
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     this.setState({ query: event.target.value });
+    console.log(this.state.query);
   };
 
   public onErrorBtnClick = (): void => {
@@ -59,18 +60,20 @@ export default class Main extends Component<unknown, MainState> {
         <section className={styles.search_wrapper}>
           <Search
             wrapperClass={styles.search}
-            inputClass={styles.input}
-            btnClass={styles.btn}
-            value={this.state.query}
-            placeholder={SEARCH_PLACEHOLDER}
-            onChangeHandler={this.onSearchInputChange}
-            onClickHandler={this.onSearchBtnClick}
+            inputProps={{
+              className: styles.input,
+              placeholder: SEARCH_PLACEHOLDER,
+              value: this.state.query,
+              onChange: this.onSearchInputChange,
+            }}
+            btnProps={{
+              className: styles.btn,
+              onClick: this.onSearchBtnClick,
+            }}
           />
-          <Button
-            className={styles.btn}
-            text={ERROR_BTN_TEXT}
-            onClick={this.onErrorBtnClick}
-          />
+          <Button className={styles.btn} onClick={this.onErrorBtnClick}>
+            {ERROR_BTN_TEXT}
+          </Button>
         </section>
         <h2 className={styles.search_result_title}>
           {SEARCH_RESULT_TITLE_TEXT}

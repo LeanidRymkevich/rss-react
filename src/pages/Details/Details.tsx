@@ -5,7 +5,6 @@ import mainPageStyles from 'src/pages/main/main.module.scss';
 import newsItemStyles from 'src/components/NewsItem/NewsItems.module.scss';
 
 import { Article } from 'src/utils/APIWorking/types';
-import { ButtonProps } from 'src/components/UI/Button/types';
 
 import Button from 'src/components/UI/Button/Button';
 
@@ -22,13 +21,6 @@ import {
   AUTHOR_SUBTITLE,
   PUBLISHER_SUBTITLE,
 } from 'src/components/NewsItem/constants';
-
-const btnProps: ButtonProps = {
-  className: `${mainPageStyles.btn} ${styles.details_btn}`,
-  type: BTN_TYPE,
-  text: BTN_TEXT,
-  onClick: () => console.log('Close details'),
-};
 
 const Details = (props: Article): ReactNode => {
   return (
@@ -65,7 +57,13 @@ const Details = (props: Article): ReactNode => {
       <a href={props.url} target={LINK_TARGET}>
         {props.url}
       </a>
-      <Button {...btnProps} />
+      <Button
+        className={`${mainPageStyles.btn} ${styles.details_btn}`}
+        type={BTN_TYPE}
+        onClick={() => console.log('Close details')}
+      >
+        {BTN_TEXT}
+      </Button>
     </section>
   );
 };
