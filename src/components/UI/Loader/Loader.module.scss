@@ -1,0 +1,21 @@
+@import 'src/common_styles/variables.scss';
+
+.loader_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.loader {
+  border: 1.2rem solid $spinner-background;
+  border-top: 1.2rem solid $main-font-color;
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
