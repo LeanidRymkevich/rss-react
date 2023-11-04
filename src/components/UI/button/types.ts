@@ -1,7 +1,9 @@
+import { ReactNode } from 'react';
+
 export interface ButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
-  text: string;
+  children: string | ReactNode;
   onClick: BtnClickHandler;
 }
 
