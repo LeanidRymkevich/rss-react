@@ -7,6 +7,7 @@ import {
   SEARCH_PLACEHOLDER,
   SEARCH_RESULT_TITLE_TEXT,
   TITLE,
+  SELECT_PARAMS,
 } from 'src/pages/Main/constants';
 import {
   getQueryFromStorage,
@@ -19,6 +20,7 @@ import {
   getNewsItemProps,
 } from 'src/logic/MainPageLogic/MainPageLogic';
 import Loader from 'src/components/UI/Loader/Loader';
+import Select from 'src/components/UI/Select/Select';
 
 const Main = (): ReactNode => {
   const [state, setState] = useState(DEFAULT_STATE);
@@ -44,6 +46,13 @@ const Main = (): ReactNode => {
     setState({ ...state, hasError: true });
   };
 
+  const onSelectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    console.log(event.target.value);
+    setState({ ...state, newsPerPage: event.target.value });
+  };
+
   return (
     <div className={styles.main}>
       <h1 className={styles.title}>{TITLE}</h1>
@@ -64,6 +73,13 @@ const Main = (): ReactNode => {
         <Button className={styles.btn} onClick={onErrorBtnClick}>
           {ERROR_BTN_TEXT}
         </Button>
+        <Select
+          {...{
+            ...SELECT_PARAMS,
+            value: state.newsPerPage,
+            onChange: onSelectChange,
+          }}
+        ></Select>
       </section>
       <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
       {state.isNewsLoading ? (

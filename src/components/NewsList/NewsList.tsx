@@ -1,8 +1,8 @@
 import styles from 'src/components/NewsList/NewsList.module.scss';
 import { ReactNode } from 'react';
 import { NewsItem } from 'src/components/NewsItem/NewsItem';
-import { NewsItemProps } from '../NewsItem/types';
-import { NewsListProps } from './types';
+import { NewsItemProps } from 'src/components/NewsItem/types';
+import { NewsListProps } from 'src/components/NewsList/types';
 
 const NO_RESULT_FOUND_RESPONSE = 'There are no results for this request';
 

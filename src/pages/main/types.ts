@@ -6,4 +6,5 @@ export interface MainState {
   total: number;
   isNewsLoading: boolean;
   hasError: boolean;
+  newsPerPage: string;
 }

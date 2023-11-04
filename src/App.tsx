@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Main from 'src/pages/Main/Main';
 import 'src/common_styles/common.scss';
 import Details from 'src/pages/Details/Details';
-import { Article } from './utils/APIWorking/types';
+import { Article } from 'src/utils/APIWorking/types';
 
 const App = (): ReactNode => {
   return (

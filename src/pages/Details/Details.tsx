@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import styles from './styles.module.scss';
+import styles from 'src/pages/Details/styles.module.scss';
 import mainPageStyles from 'src/pages/main/main.module.scss';
 import newsItemStyles from 'src/components/NewsItem/NewsItems.module.scss';
 
