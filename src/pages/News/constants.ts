@@ -1,5 +1,5 @@
 import { SelectParams } from 'src/components/UI/Select/types';
-import { MainState } from 'src/pages/News/types';
+import { NewsState } from 'src/pages/News/types';
 import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 const SEARCH_PLACEHOLDER = 'Write your request here';
@@ -7,7 +7,7 @@ const ERROR_BTN_TEXT = 'Throw an error';
 const TITLE = 'New Searcher';
 const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
-const DEFAULT_STATE: MainState = {
+const DEFAULT_STATE: NewsState = {
   ...state,
   inputValue: state.query,
   articles: [],

@@ -18,6 +18,7 @@ import Select from 'src/components/UI/Select/Select';
 import { useFetching } from 'src/hooks/useFetching';
 import { getArticles } from 'src/utils/APIWorking/APIWorking';
 import { APIResponse } from 'src/utils/APIWorking/types';
+import Pagination from 'src/components/UI/Pagination/Pagination';
 
 const News = (): ReactNode => {
   const [state, setState] = useState(DEFAULT_STATE);
@@ -57,6 +58,16 @@ const News = (): ReactNode => {
     setState({ ...state, limit: event.target.value });
   };
 
+  const onBulletClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+    const target: EventTarget = event.target;
+    let digit: string | null;
+
+    if (target instanceof HTMLSpanElement && (digit = target.textContent)) {
+      setRecord('page', digit);
+      setState({ ...state, page: digit });
+    }
+  };
+
   return (
     <div className={styles.news}>
       <h1 className={styles.title}>{TITLE}</h1>
@@ -86,11 +97,8 @@ const News = (): ReactNode => {
         ></Select>
       </section>
       <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <NewsList items={getNewsItemProps(state.articles)} />
-      )}
+      {isLoading ? <Loader /> : <NewsList items={getNewsItemProps(state)} />}
+      <Pagination {...{ ...state, onClick: onBulletClick }} />
     </div>
   );
 };

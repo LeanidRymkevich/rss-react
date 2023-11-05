@@ -1,6 +1,6 @@
 import { Article } from 'src/utils/APIWorking/types';
 
-export interface MainState {
+export interface NewsState {
   inputValue: string;
   query: string;
   articles: Article[];
