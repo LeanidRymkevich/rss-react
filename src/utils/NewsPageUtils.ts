@@ -1,7 +1,7 @@
 import { NewsItemProps } from 'src/components/NewsItem/types';
 import { Article } from 'src/utils/APIWorking/types';
 
-export function getNewsItemProps(articles: Article[]): NewsItemProps[] {
+const getNewsItemProps = (articles: Article[]): NewsItemProps[] => {
   return articles.map((item: Article, idx: number): NewsItemProps => {
     return {
       itemNum: `${idx + 1}`,
@@ -10,4 +10,9 @@ export function getNewsItemProps(articles: Article[]): NewsItemProps[] {
       author: item.author || 'none',
     };
   });
-}
+};
+
+const calcPageAmount = (total: string, limit: string): number =>
+  Math.ceil(+total / +limit);
+
+export { getNewsItemProps, calcPageAmount };

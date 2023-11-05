@@ -9,6 +9,7 @@ const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
 const DEFAULT_STATE: MainState = {
   ...state,
+  inputValue: state.query,
   articles: [],
   total: 0,
   hasError: false,

@@ -12,7 +12,7 @@ import {
 import { setRecord } from 'src/utils/StorageWorking/StorageWorking';
 import styles from 'src/pages/News/news.module.scss';
 import NewsList from 'src/components/NewsList/NewsList';
-import { getNewsItemProps } from 'src/utils/SearchPageUtils';
+import { getNewsItemProps } from 'src/utils/NewsPageUtils';
 import Loader from 'src/components/UI/Loader/Loader';
 import Select from 'src/components/UI/Select/Select';
 import { useFetching } from 'src/hooks/useFetching';
@@ -33,17 +33,17 @@ const News = (): ReactNode => {
 
   useEffect(() => {
     fetching(state, setState);
-  }, [state.page, state.limit]);
+  }, [state.query, state.page, state.limit]);
 
   const onSearchBtnClick = async (): Promise<void> => {
-    setRecord('query', state.query);
-    fetching(state, setState);
+    setState({ ...state, query: state.inputValue });
+    setRecord('query', state.inputValue);
   };
 
   const onSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    setState({ ...state, query: event.target.value });
+    setState({ ...state, inputValue: event.target.value });
   };
 
   const onErrorBtnClick = (): void => {
@@ -66,7 +66,7 @@ const News = (): ReactNode => {
           inputProps={{
             className: styles.input,
             placeholder: SEARCH_PLACEHOLDER,
-            value: state.query,
+            value: state.inputValue,
             onChange: onSearchInputChange,
           }}
           btnProps={{
