@@ -21,19 +21,29 @@ import {
 } from 'src/logic/MainPageLogic/MainPageLogic';
 import Loader from 'src/components/UI/Loader/Loader';
 import Select from 'src/components/UI/Select/Select';
+import { useFetching } from 'src/hooks/useFetching';
+import { MainState } from './types';
 
 const Main = (): ReactNode => {
   const [state, setState] = useState(DEFAULT_STATE);
+  const [fetching, isLoading] = useFetching(
+    (
+      state: MainState,
+      setState: React.Dispatch<React.SetStateAction<MainState>>,
+      query: string
+    ): Promise<void> => doSearch(state, setState, query)
+  );
 
   useEffect((): void => {
     const storageQuery: string = getQueryFromStorage();
-    doSearch(state, setState, storageQuery);
+    fetching(state, setState, storageQuery);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSearchBtnClick = async (): Promise<void> => {
     setQueryToStorage(state.query);
     doSearch(state, setState, state.query);
+    fetching(state, setState, state.query);
   };
 
   const onSearchInputChange = (
@@ -82,7 +92,7 @@ const Main = (): ReactNode => {
         ></Select>
       </section>
       <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
-      {state.isNewsLoading ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <NewsList items={getNewsItemProps(state.results)} />

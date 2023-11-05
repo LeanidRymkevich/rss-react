@@ -10,7 +10,6 @@ const DEFAULT_STATE: MainState = {
   query: '',
   results: [],
   total: 0,
-  isNewsLoading: false,
   hasError: false,
   newsPerPage: '10',
 };

@@ -19,7 +19,6 @@ export async function doSearch(
   setState: React.Dispatch<React.SetStateAction<MainState>>,
   query: string
 ): Promise<void> {
-  setState({ ...state, isNewsLoading: true });
   const response: APIResponse = await getArticles(query || null);
   const [totalItems, resultItems] = [
     response.totalResults,
@@ -30,6 +29,5 @@ export async function doSearch(
     query: query,
     results: resultItems,
     total: totalItems,
-    isNewsLoading: false,
   });
 }

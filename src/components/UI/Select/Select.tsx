@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { SelectParams, OptionParams } from 'src/components/UI/Select/types';
+import styles from 'src/pages/main/main.module.scss';
 
 const Select = ({
   defaultOption,
@@ -8,7 +9,7 @@ const Select = ({
   onChange,
 }: SelectParams): ReactNode => {
   return (
-    <select value={value} onChange={onChange}>
+    <select className={styles.btn} value={value} onChange={onChange}>
       <option disabled value="">
         {defaultOption}
       </option>
