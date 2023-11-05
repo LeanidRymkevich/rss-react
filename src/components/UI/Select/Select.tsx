@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { SelectParams, OptionParams } from 'src/components/UI/Select/types';
-import styles from 'src/pages/main/main.module.scss';
+import styles from 'src/pages/News/News.module.scss';
 
 const Select = ({
   defaultOption,

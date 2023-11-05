@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import styles from 'src/pages/Details/styles.module.scss';
-import mainPageStyles from 'src/pages/main/main.module.scss';
+import newsPageStyles from 'src/pages/News/news.module.scss';
 import newsItemStyles from 'src/components/NewsItem/NewsItems.module.scss';
 
 import { Article } from 'src/utils/APIWorking/types';
@@ -58,7 +58,7 @@ const Details = (props: Article): ReactNode => {
         {props.url}
       </a>
       <Button
-        className={`${mainPageStyles.btn} ${styles.details_btn}`}
+        className={`${newsPageStyles.btn} ${styles.details_btn}`}
         type={BTN_TYPE}
         onClick={() => console.log('Close details')}
       >

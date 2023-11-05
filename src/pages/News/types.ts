@@ -2,8 +2,9 @@ import { Article } from 'src/utils/APIWorking/types';
 
 export interface MainState {
   query: string;
-  results: Article[];
+  articles: Article[];
   total: number;
   hasError: boolean;
-  newsPerPage: string;
+  limit: string;
+  page: string;
 }

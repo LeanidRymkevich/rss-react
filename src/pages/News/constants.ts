@@ -1,5 +1,6 @@
 import { SelectParams } from 'src/components/UI/Select/types';
-import { MainState } from 'src/pages/Main/types';
+import { MainState } from 'src/pages/News/types';
+import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 const SEARCH_PLACEHOLDER = 'Write your request here';
 const ERROR_BTN_TEXT = 'Throw an error';
@@ -7,11 +8,10 @@ const TITLE = 'New Searcher';
 const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
 const DEFAULT_STATE: MainState = {
-  query: '',
-  results: [],
+  ...state,
+  articles: [],
   total: 0,
   hasError: false,
-  newsPerPage: '10',
 };
 
 const SELECT_PARAMS: Pick<SelectParams, 'defaultOption' | 'options'> = {

@@ -1,7 +1,7 @@
 import { APIResponse } from 'src/utils/APIWorking/types';
 import * as constants from 'src/utils/APIWorking/constants';
 
-function makeUrl(query: string | null, page: number): URL {
+function makeUrl(query: string, page: string, limit: string): URL {
   let url: URL;
 
   if (query) {
@@ -12,10 +12,7 @@ function makeUrl(query: string | null, page: number): URL {
   }
 
   url.searchParams.set(constants.LANGUAGE_PARAM, constants.LANGUAGE);
-  url.searchParams.set(
-    constants.ITEMS_PER_PAGE_PARAM,
-    `${constants.ITEMS_PER_PAGE}`
-  );
+  url.searchParams.set(constants.ITEMS_PER_PAGE_PARAM, limit);
   url.searchParams.set(constants.PAGE_NUMBER_PARAM, `${page}`);
   url.searchParams.set(constants.API_KEY_PARAM, constants.API_KEY);
 
@@ -23,10 +20,11 @@ function makeUrl(query: string | null, page: number): URL {
 }
 
 export async function getArticles(
-  query: string | null,
-  page: number = 1
+  query: string,
+  page: string,
+  limit: string
 ): Promise<APIResponse> {
-  const response: Response = await fetch(makeUrl(query, page));
+  const response: Response = await fetch(makeUrl(query, page, limit));
   const apiResponse: APIResponse = await response.json();
   return apiResponse;
 }

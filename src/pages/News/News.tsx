@@ -8,42 +8,36 @@ import {
   SEARCH_RESULT_TITLE_TEXT,
   TITLE,
   SELECT_PARAMS,
-} from 'src/pages/Main/constants';
-import {
-  getQueryFromStorage,
-  setQueryToStorage,
-} from 'src/utils/StorageWorking/StorageWorking';
-import styles from 'src/pages/main/main.module.scss';
+} from 'src/pages/News/constants';
+import { setRecord } from 'src/utils/StorageWorking/StorageWorking';
+import styles from 'src/pages/News/news.module.scss';
 import NewsList from 'src/components/NewsList/NewsList';
-import {
-  doSearch,
-  getNewsItemProps,
-} from 'src/logic/MainPageLogic/MainPageLogic';
+import { getNewsItemProps } from 'src/utils/SearchPageUtils';
 import Loader from 'src/components/UI/Loader/Loader';
 import Select from 'src/components/UI/Select/Select';
 import { useFetching } from 'src/hooks/useFetching';
-import { MainState } from './types';
+import { getArticles } from 'src/utils/APIWorking/APIWorking';
+import { APIResponse } from 'src/utils/APIWorking/types';
 
-const Main = (): ReactNode => {
+const News = (): ReactNode => {
   const [state, setState] = useState(DEFAULT_STATE);
-  const [fetching, isLoading] = useFetching(
-    (
-      state: MainState,
-      setState: React.Dispatch<React.SetStateAction<MainState>>,
-      query: string
-    ): Promise<void> => doSearch(state, setState, query)
-  );
+  const [fetching, isLoading] = useFetching(async (): Promise<void> => {
+    const { query, page, limit } = state;
+    const response: APIResponse = await getArticles(query, page, limit);
+    setState({
+      ...state,
+      articles: response.articles || [],
+      total: response.totalResults,
+    });
+  });
 
-  useEffect((): void => {
-    const storageQuery: string = getQueryFromStorage();
-    fetching(state, setState, storageQuery);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => {
+    fetching(state, setState);
+  }, [state.page, state.limit]);
 
   const onSearchBtnClick = async (): Promise<void> => {
-    setQueryToStorage(state.query);
-    doSearch(state, setState, state.query);
-    fetching(state, setState, state.query);
+    setRecord('query', state.query);
+    fetching(state, setState);
   };
 
   const onSearchInputChange = (
@@ -59,12 +53,12 @@ const Main = (): ReactNode => {
   const onSelectChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
-    console.log(event.target.value);
-    setState({ ...state, newsPerPage: event.target.value });
+    setRecord('limit', event.target.value);
+    setState({ ...state, limit: event.target.value });
   };
 
   return (
-    <div className={styles.main}>
+    <div className={styles.news}>
       <h1 className={styles.title}>{TITLE}</h1>
       <section className={styles.search_wrapper}>
         <Search
@@ -86,7 +80,7 @@ const Main = (): ReactNode => {
         <Select
           {...{
             ...SELECT_PARAMS,
-            value: state.newsPerPage,
+            value: state.limit,
             onChange: onSelectChange,
           }}
         ></Select>
@@ -95,10 +89,10 @@ const Main = (): ReactNode => {
       {isLoading ? (
         <Loader />
       ) : (
-        <NewsList items={getNewsItemProps(state.results)} />
+        <NewsList items={getNewsItemProps(state.articles)} />
       )}
     </div>
   );
 };
 
-export default Main;
+export default News;

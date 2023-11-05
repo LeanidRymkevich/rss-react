@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import Main from 'src/pages/Main/Main';
+import News from 'src/pages/News/News';
 import 'src/common_styles/common.scss';
 
 const App = (): ReactNode => {
-  return <Main />;
+  return <News />;
 };
 
 export default App;
