@@ -36,5 +36,5 @@ export async function getArticle(id: number): Promise<Article> {
   const apiResponse: APIResponse = await response.json();
   const articles: Article[] | undefined = apiResponse.articles;
   if (!articles) throw new Error('Error ing getArticle');
-  return articles[id];
+  return articles[id - 1];
 }
