@@ -9,6 +9,12 @@
   width: 47%;
   color: $details-font-color;
   font-size: 1.5rem;
+  height: fit-content;
+
+  @media (max-width: $tablet-breakpoint) {
+    margin-top: 1rem;
+    width: 100%;
+  }
 }
 
 .img {

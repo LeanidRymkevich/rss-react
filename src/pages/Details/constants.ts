@@ -4,6 +4,7 @@ const LINK_TARGET = 'blank';
 const BTN_TYPE = 'button';
 const BTN_TEXT = 'Close details';
 const SEARCHED_IN_CONTENT_CHAR = '[';
+const LINK_TEXT = `Read more on the publisher's website >`;
 
 export {
   IMG_ALT_TEXT,
@@ -12,4 +13,5 @@ export {
   BTN_TYPE,
   BTN_TEXT,
   SEARCHED_IN_CONTENT_CHAR,
+  LINK_TEXT,
 };

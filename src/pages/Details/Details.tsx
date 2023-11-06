@@ -16,6 +16,7 @@ import {
   IMG_ALT_TEXT,
   LINK_TARGET,
   SEARCHED_IN_CONTENT_CHAR,
+  LINK_TEXT,
 } from 'src/pages/Details/constants';
 import {
   AUTHOR_SUBTITLE,
@@ -55,7 +56,7 @@ const Details = (props: Article): ReactNode => {
         </span>
       </p>
       <a href={props.url} target={LINK_TARGET}>
-        {props.url}
+        {LINK_TEXT}
       </a>
       <Button
         className={`${newsPageStyles.btn} ${styles.details_btn}`}
