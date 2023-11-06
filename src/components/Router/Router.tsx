@@ -39,8 +39,7 @@ const details = {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RouterLayout />}>
-      <Route index element={<MainLayout />} />
-      <Route path={`${Pages.MAIN}/:${INDEXES.MAIN}`} element={<MainLayout />}>
+      <Route path={`${Pages.MAIN}?/:${INDEXES.MAIN}?`} element={<MainLayout />}>
         <Route
           path={`${Pages.DETAILS}/:${INDEXES.DETAILS}`}
           element={<Details {...details} />}
