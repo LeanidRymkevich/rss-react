@@ -6,6 +6,7 @@ import {
 import RouterLayout from 'src/components/layouts/RouterLayout/RouterLayout';
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import Details from 'src/pages/Details/Details';
+import NotFound from 'src/pages/NotFound/NotFound';
 
 export enum Pages {
   MAIN = 'main',
@@ -45,6 +46,8 @@ const router = createBrowserRouter(
           element={<Details {...details} />}
         />
       </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
