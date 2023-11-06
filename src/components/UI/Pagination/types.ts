@@ -3,4 +3,5 @@ export interface PaginationProps {
   limit: string;
   page: string;
   onClick: React.MouseEventHandler<HTMLSpanElement>;
+  pathTemplate: string;
 }

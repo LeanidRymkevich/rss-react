@@ -7,6 +7,16 @@ import RouterLayout from 'src/components/layouts/RouterLayout/RouterLayout';
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import Details from 'src/pages/Details/Details';
 
+export enum Pages {
+  MAIN = 'main',
+  DETAILS = 'details',
+}
+
+export enum INDEXES {
+  MAIN = 'pageNum',
+  DETAILS = 'id',
+}
+
 const details = {
   source: {
     id: 'engadget',
@@ -28,8 +38,12 @@ const details = {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RouterLayout />}>
-      <Route path="/" element={<MainLayout />}>
-        <Route path="/" element={<Details {...details} />} />
+      <Route index element={<MainLayout />} />
+      <Route path={`${Pages.MAIN}/:${INDEXES.MAIN}`} element={<MainLayout />}>
+        <Route
+          path={`${Pages.DETAILS}/:${INDEXES.DETAILS}`}
+          element={<Details {...details} />}
+        />
       </Route>
     </Route>
   )

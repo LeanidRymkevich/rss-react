@@ -1,4 +1,5 @@
 import { ReactNode, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import styles from 'src/components/UI/Pagination/pagination.module.scss';
 import { PaginationProps } from 'src/components/UI/Pagination/types';
 import { calcPageAmount, createDigitsArray } from 'src/utils/NewsPageUtils';
@@ -8,6 +9,7 @@ const Pagination = ({
   limit,
   page,
   onClick,
+  pathTemplate,
 }: PaginationProps): ReactNode => {
   const pageAmount = calcPageAmount(total, +limit);
   const bullets: number[] = useMemo(
@@ -19,7 +21,8 @@ const Pagination = ({
     <div className={styles.pagination}>
       {bullets.map((digit: number): ReactNode => {
         return (
-          <span
+          <Link
+            to={window.location.origin + `/${pathTemplate}` + digit}
             key={digit}
             className={
               +page === digit
@@ -29,7 +32,7 @@ const Pagination = ({
             onClick={onClick}
           >
             {digit}
-          </span>
+          </Link>
         );
       })}
     </div>

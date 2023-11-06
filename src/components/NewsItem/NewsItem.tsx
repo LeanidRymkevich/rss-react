@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { NewsItemProps } from 'src/components/NewsItem/types';
 import styles from 'src/components/NewsItem/NewsItems.module.scss';
+import { Link } from 'react-router-dom';
+import { Pages } from 'src/components/Router/Router';
 
 const LINK_TEXT = 'Learn more';
 const DESCRIPTION_SUBTITLE = 'Description: ';
@@ -33,7 +35,7 @@ const NewsItem = ({
           <span className={styles.newsItem__subtitle}>{AUTHOR_SUBTITLE}</span>
           <span>{author}</span>
         </p>
-        <a href="#">{LINK_TEXT}</a>
+        <Link to={`${Pages.DETAILS}/${itemNum}`}>{LINK_TEXT}</Link>
       </div>
     </li>
   );

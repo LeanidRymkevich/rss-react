@@ -18,6 +18,7 @@ import { useFetching } from 'src/hooks/useFetching';
 import { getArticles } from 'src/utils/APIWorking/APIWorking';
 import { APIResponse } from 'src/utils/APIWorking/types';
 import Pagination from 'src/components/UI/Pagination/Pagination';
+import { Pages } from 'src/components/Router/Router';
 
 const News = (): ReactNode => {
   const [state, setState] = useState(DEFAULT_STATE);
@@ -98,7 +99,13 @@ const News = (): ReactNode => {
       </section>
       <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
       {isLoading ? <Loader /> : <NewsList items={getNewsItemProps(state)} />}
-      <Pagination {...{ ...state, onClick: onBulletClick }} />
+      <Pagination
+        {...{
+          ...state,
+          onClick: onBulletClick,
+          pathTemplate: `${Pages.MAIN}/`,
+        }}
+      />
     </div>
   );
 };
