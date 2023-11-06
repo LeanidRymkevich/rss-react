@@ -33,7 +33,7 @@ const News = (): ReactNode => {
   });
 
   useEffect(() => {
-    fetching(state, setState);
+    fetching();
   }, [state.query, state.page, state.limit]);
 
   const onSearchBtnClick = async (): Promise<void> => {
