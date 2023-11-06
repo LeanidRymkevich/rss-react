@@ -36,8 +36,9 @@ const News = (): ReactNode => {
   }, [state.query, state.page, state.limit]);
 
   const onSearchBtnClick = async (): Promise<void> => {
-    setState({ ...state, query: state.inputValue, page: '1' });
+    setRecord('page', '1');
     setRecord('query', state.inputValue);
+    setState({ ...state, query: state.inputValue, page: '1' });
   };
 
   const onSearchInputChange = (
@@ -54,6 +55,7 @@ const News = (): ReactNode => {
     event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
     setRecord('limit', event.target.value);
+    setRecord('page', '1');
     setState({ ...state, limit: event.target.value, page: '1' });
   };
 

@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import News from 'src/pages/News/News';
-import RouterLayout from 'src/components/Router/RouterLayout';
+import RouterLayout from 'src/components/layouts/RouterLayout/RouterLayout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
