@@ -6,7 +6,6 @@ import {
   ERROR_BTN_TEXT,
   SEARCH_PLACEHOLDER,
   SEARCH_RESULT_TITLE_TEXT,
-  TITLE,
   SELECT_PARAMS,
 } from 'src/pages/News/constants';
 import { setRecord } from 'src/utils/StorageWorking/StorageWorking';
@@ -70,7 +69,6 @@ const News = (): ReactNode => {
 
   return (
     <div className={styles.news}>
-      <h1 className={styles.title}>{TITLE}</h1>
       <section className={styles.search_wrapper}>
         <Search
           wrapperClass={styles.search}

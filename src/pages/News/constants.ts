@@ -4,7 +4,6 @@ import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 const SEARCH_PLACEHOLDER = 'Write your request here';
 const ERROR_BTN_TEXT = 'Throw an error';
-const TITLE = 'New Searcher';
 const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
 const DEFAULT_STATE: NewsState = {
@@ -27,7 +26,6 @@ const SELECT_PARAMS: Pick<SelectParams, 'defaultOption' | 'options'> = {
 export {
   SEARCH_PLACEHOLDER,
   ERROR_BTN_TEXT,
-  TITLE,
   SEARCH_RESULT_TITLE_TEXT,
   DEFAULT_STATE,
   SELECT_PARAMS,

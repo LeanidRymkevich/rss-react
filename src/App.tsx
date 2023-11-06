@@ -1,16 +1,10 @@
 import { ReactNode } from 'react';
-import News from 'src/pages/News/News';
 import 'src/common_styles/common.scss';
+import { RouterProvider } from 'react-router-dom';
+import router from 'src/components/Router/Router';
 
 const App = (): ReactNode => {
-  return <News />;
+  return <RouterProvider router={router} />;
 };
 
 export default App;
-
-// wrapper
-{
-  /* <div style={{ display: 'flex', width: '100%', gap: '1rem' }}>
-<Main />
-</div> */
-}
