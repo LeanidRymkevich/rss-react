@@ -23,14 +23,17 @@ import {
   AUTHOR_SUBTITLE,
   PUBLISHER_SUBTITLE,
 } from 'src/components/NewsItem/NewsItem';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getArticle } from 'src/utils/APIWorking/APIWorking';
 import { useFetching } from 'src/hooks/useFetching';
 import Loader from 'src/components/UI/Loader/Loader';
+import { getRidOfDetailsInPath } from 'src/utils/MainPageUtils';
 
 const Details = (): ReactNode => {
   const [article, setArticle] = useState(DEFAULT_ARTICLE);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   if (!id) throw new Error('Invalid details ID');
 
   const [fetching, isLoading] = useFetching(async (): Promise<void> => {
@@ -42,8 +45,18 @@ const Details = (): ReactNode => {
     fetching();
   }, [id]);
 
+  const onBtnClick = (): void => {
+    const path: string = location.pathname;
+    const newPath: string = getRidOfDetailsInPath(path);
+    navigate(newPath);
+  };
+
+  const onSectionClick = (e: React.MouseEvent<HTMLElement>): void => {
+    e.stopPropagation();
+  };
+
   return (
-    <section className={styles.details}>
+    <section className={styles.details} onClick={onSectionClick}>
       {isLoading ? (
         <Loader />
       ) : (
@@ -83,7 +96,7 @@ const Details = (): ReactNode => {
           <Button
             className={`${newsPageStyles.btn} ${styles.details_btn}`}
             type={BTN_TYPE}
-            onClick={() => console.log('Close details')}
+            onClick={onBtnClick}
           >
             {BTN_TEXT}
           </Button>
