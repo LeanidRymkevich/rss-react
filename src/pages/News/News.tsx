@@ -19,14 +19,18 @@ import { getArticles } from 'src/utils/APIWorking/APIWorking';
 import { APIResponse } from 'src/utils/APIWorking/types';
 import Pagination from 'src/components/UI/Pagination/Pagination';
 import { Pages } from 'src/components/Router/Router';
+import { useParams } from 'react-router-dom';
 
 const News = (): ReactNode => {
+  const { page } = useParams();
   const [state, setState] = useState(DEFAULT_STATE);
   const [fetching, isLoading] = useFetching(async (): Promise<void> => {
     const { query, page, limit } = state;
+    console.log(page);
     const response: APIResponse = await getArticles(query, page, limit);
     setState({
       ...state,
+      page: page || '1',
       articles: response.articles || [],
       total: response.totalResults,
     });
@@ -34,7 +38,7 @@ const News = (): ReactNode => {
 
   useEffect(() => {
     fetching();
-  }, [state.query, state.page, state.limit]);
+  }, [state.query, page, state.limit]);
 
   const onSearchBtnClick = async (): Promise<void> => {
     setRecord('page', '1');
@@ -58,16 +62,6 @@ const News = (): ReactNode => {
     setRecord('limit', event.target.value);
     setRecord('page', '1');
     setState({ ...state, limit: event.target.value, page: '1' });
-  };
-
-  const onBulletClick = (event: React.MouseEvent<HTMLSpanElement>) => {
-    const target: EventTarget = event.target;
-    let digit: string | null;
-
-    if (target instanceof HTMLSpanElement && (digit = target.textContent)) {
-      setRecord('page', digit);
-      setState({ ...state, page: digit });
-    }
   };
 
   return (
@@ -102,8 +96,7 @@ const News = (): ReactNode => {
       <Pagination
         {...{
           ...state,
-          onClick: onBulletClick,
-          pathTemplate: `${Pages.MAIN}/`,
+          pathTemplate: Pages.MAIN,
         }}
       />
     </div>

@@ -14,7 +14,7 @@ export enum Pages {
 }
 
 export enum INDEXES {
-  MAIN = 'pageNum',
+  MAIN = 'page',
   DETAILS = 'id',
 }
 
