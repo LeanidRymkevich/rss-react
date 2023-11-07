@@ -30,11 +30,16 @@ export async function getArticles(
   return apiResponse;
 }
 
-export async function getArticle(id: number): Promise<Article> {
-  const { query, page, limit } = state;
+export async function getArticle(
+  id: number,
+  page: string,
+  limit: string
+): Promise<Article> {
+  const { query } = state;
   const response: Response = await fetch(makeUrl(query, page, limit));
   const apiResponse: APIResponse = await response.json();
   const articles: Article[] | undefined = apiResponse.articles;
   if (!articles) throw new Error('Error ing getArticle');
+  console.log(articles[id - 1]);
   return articles[id - 1];
 }

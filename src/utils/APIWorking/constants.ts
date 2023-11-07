@@ -1,4 +1,4 @@
-const API_KEY = '8797a943de9744cb8236fd189392092c';
+const API_KEY = '5550efb72e164f1e897f92fd9ecd2386'; // backup key '8797a943de9744cb8236fd189392092c'
 const API_KEY_PARAM = 'apiKey';
 
 const EVERYTHING_ENDPOINT = 'https://newsapi.org/v2/everything';

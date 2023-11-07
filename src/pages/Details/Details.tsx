@@ -28,16 +28,22 @@ import { getArticle } from 'src/utils/APIWorking/APIWorking';
 import { useFetching } from 'src/hooks/useFetching';
 import Loader from 'src/components/UI/Loader/Loader';
 import { getRidOfDetailsInPath } from 'src/utils/MainPageUtils';
+import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 const Details = (): ReactNode => {
   const [article, setArticle] = useState(DEFAULT_ARTICLE);
-  const { id } = useParams();
+  const { id, page } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   if (!id) throw new Error('Invalid details ID');
 
   const [fetching, isLoading] = useFetching(async (): Promise<void> => {
-    const article: Article = await getArticle(+id);
+    const articleID: number = +id - ((page ? +page : 1) - 1) * +state.limit;
+    const article: Article = await getArticle(
+      articleID,
+      page || '1',
+      state.limit
+    );
     setArticle(article);
   });
 

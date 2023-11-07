@@ -26,7 +26,6 @@ const News = (): ReactNode => {
   const [state, setState] = useState(DEFAULT_STATE);
   const [fetching, isLoading] = useFetching(async (): Promise<void> => {
     const { query, limit } = state;
-    console.log(page);
     const response: APIResponse = await getArticles(query, page || '1', limit);
     setState({
       ...state,
@@ -41,6 +40,7 @@ const News = (): ReactNode => {
   }, [state.query, page, state.limit]);
 
   const onSearchBtnClick = async (): Promise<void> => {
+    setRecord('page', '1');
     setRecord('query', state.inputValue);
     setState({ ...state, query: state.inputValue, page: '1' });
   };
@@ -59,6 +59,7 @@ const News = (): ReactNode => {
     event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
     setRecord('limit', event.target.value);
+    setRecord('page', '1');
     setState({ ...state, limit: event.target.value, page: '1' });
   };
 
