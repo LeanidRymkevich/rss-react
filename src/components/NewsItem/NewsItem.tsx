@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
-import { NewsItemProps } from 'src/components/NewsItem/types';
-import styles from 'src/components/NewsItem/NewsItems.module.scss';
 import { Link } from 'react-router-dom';
+
+import styles from 'src/components/NewsItem/NewsItems.module.scss';
+
+import { NewsItemProps } from 'src/components/NewsItem/types';
 import { Pages } from 'src/components/Router/Router';
 
 const LINK_TEXT = 'Learn more';

@@ -1,9 +1,12 @@
-import styles from 'src/components/NewsList/NewsList.module.scss';
 import { ReactNode, useContext } from 'react';
+
+import styles from 'src/components/NewsList/NewsList.module.scss';
+
+import { getNewsItemProps } from 'src/utils/NewsPageUtils';
+
 import { NewsItem } from 'src/components/NewsItem/NewsItem';
 import { NewsItemProps } from 'src/components/NewsItem/types';
 import NewsContext from 'src/pages/News/NewsContext';
-import { getNewsItemProps } from 'src/utils/NewsPageUtils';
 
 const NO_RESULT_FOUND_RESPONSE = 'There are no results for this request';
 

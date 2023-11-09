@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+
 import 'src/components/layouts/RouterLayout/routerLayout.scss';
 
 const TITLE = 'New Searcher';

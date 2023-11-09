@@ -1,12 +1,18 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import styles from 'src/pages/Details/styles.module.scss';
-import newsPageStyles from 'src/pages/News/news.module.scss';
+import searchBarStyles from 'src/components/SearchBar/SearchBar.module.scss';
 import newsItemStyles from 'src/components/NewsItem/NewsItems.module.scss';
 
 import { Article } from 'src/utils/APIWorking/types';
+import { getRidOfDetailsInPath } from 'src/utils/MainPageUtils';
+import { useFetching } from 'src/hooks/useFetching';
+import { getArticle } from 'src/utils/APIWorking/APIWorking';
+import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 import Button from 'src/components/UI/Button/Button';
+import Loader from 'src/components/UI/Loader/Loader';
 
 import newsImgSRC from 'src/assets/news.jpg';
 import {
@@ -23,18 +29,16 @@ import {
   AUTHOR_SUBTITLE,
   PUBLISHER_SUBTITLE,
 } from 'src/components/NewsItem/NewsItem';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getArticle } from 'src/utils/APIWorking/APIWorking';
-import { useFetching } from 'src/hooks/useFetching';
-import Loader from 'src/components/UI/Loader/Loader';
-import { getRidOfDetailsInPath } from 'src/utils/MainPageUtils';
-import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 const Details = (): ReactNode => {
-  const [article, setArticle] = useState(DEFAULT_ARTICLE);
   const { id, page } = useParams();
+
   const navigate = useNavigate();
+
   const location = useLocation();
+
+  const [article, setArticle] = useState(DEFAULT_ARTICLE);
+
   if (!id) throw new Error('Invalid details ID');
 
   const [fetching, isLoading] = useFetching(async (): Promise<void> => {
@@ -100,7 +104,7 @@ const Details = (): ReactNode => {
             {LINK_TEXT}
           </a>
           <Button
-            className={`${newsPageStyles.btn} ${styles.details_btn}`}
+            className={`${searchBarStyles.btn} ${styles.details_btn}`}
             type={BTN_TYPE}
             onClick={onBtnClick}
           >

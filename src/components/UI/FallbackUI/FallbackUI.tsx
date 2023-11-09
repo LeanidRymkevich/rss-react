@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
+
 import scss from 'src/components/UI/FallbackUI/FallbackUI.module.scss';
 import styles from 'src/pages/News/News.module.scss';
+
 import Button from 'src/components/UI/Button/Button';
 
 const FALLBACK_MESSAGE =

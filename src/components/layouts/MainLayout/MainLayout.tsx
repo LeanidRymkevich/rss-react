@@ -1,9 +1,12 @@
 import { ReactNode } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Pages } from 'src/components/Router/Router';
+
 import styles from 'src/components/layouts/MainLayout/MainLayout.module.scss';
-import News from 'src/pages/News/News';
+
 import { getRidOfDetailsInPath } from 'src/utils/MainPageUtils';
+
+import { Pages } from 'src/components/Router/Router';
+import News from 'src/pages/News/News';
 
 const MainLayout = (): ReactNode => {
   const navigate = useNavigate();

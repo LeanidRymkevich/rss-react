@@ -40,6 +40,5 @@ export async function getArticle(
   const apiResponse: APIResponse = await response.json();
   const articles: Article[] | undefined = apiResponse.articles;
   if (!articles) throw new Error('Error ing getArticle');
-  console.log(articles[id - 1]);
   return articles[id - 1];
 }

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import styles from 'src/components/UI/Loader/Loader.module.scss';
 
 const Loader = (): ReactNode => {

@@ -1,8 +1,10 @@
 import { ReactNode, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+
 import styles from 'src/components/UI/Pagination/pagination.module.scss';
-import { PaginationProps } from 'src/components/UI/Pagination/types';
+
 import { calcPageAmount, createDigitsArray } from 'src/utils/NewsPageUtils';
+import { PaginationProps } from 'src/components/UI/Pagination/types';
 
 const Pagination = ({
   total,

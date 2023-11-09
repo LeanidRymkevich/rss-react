@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
-import { SEARCH_BTN_TEXT, SearchProps } from 'src/components/UI/Search/types';
+
 import Input from 'src/components/UI/Input/Input';
 import Button from 'src/components/UI/Button/Button';
+
+import { SEARCH_BTN_TEXT, SearchProps } from 'src/components/UI/Search/types';
 
 const Search = ({
   wrapperClass,
