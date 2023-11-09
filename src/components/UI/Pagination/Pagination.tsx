@@ -1,5 +1,5 @@
 import { ReactNode, useMemo } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from 'src/components/UI/Pagination/pagination.module.scss';
 import { PaginationProps } from 'src/components/UI/Pagination/types';
 import { calcPageAmount, createDigitsArray } from 'src/utils/NewsPageUtils';
@@ -8,8 +8,8 @@ const Pagination = ({
   total,
   limit,
   pathTemplate,
+  page,
 }: PaginationProps): ReactNode => {
-  const { page } = useParams();
   const pageAmount = calcPageAmount(total, +limit);
   const bullets: number[] = useMemo(
     (): number[] => createDigitsArray(pageAmount),

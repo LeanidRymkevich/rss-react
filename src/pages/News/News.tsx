@@ -1,15 +1,13 @@
 import { ReactNode, useEffect, useState } from 'react';
 import Button from 'src/components/UI/Button/Button';
-import Search from 'src/components/Search/Search';
+import Search from 'src/components/UI/Search/Search';
 import {
   DEFAULT_NEWS_CONTEXT,
-  DEFAULT_STATE,
   ERROR_BTN_TEXT,
   SEARCH_PLACEHOLDER,
   SEARCH_RESULT_TITLE_TEXT,
   SELECT_PARAMS,
 } from 'src/pages/News/constants';
-import { setRecord } from 'src/utils/StorageWorking/StorageWorking';
 import styles from 'src/pages/News/news.module.scss';
 import NewsList from 'src/components/NewsList/NewsList';
 import Loader from 'src/components/UI/Loader/Loader';
@@ -19,56 +17,61 @@ import { getArticles } from 'src/utils/APIWorking/APIWorking';
 import { APIResponse } from 'src/utils/APIWorking/types';
 import Pagination from 'src/components/UI/Pagination/Pagination';
 import { Pages } from 'src/components/Router/Router';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import NewsContext from 'src/pages/News/NewsContext';
 import { INewsContext } from 'src/pages/News/types';
+import { setNewsRecords } from 'src/utils/NewsPageUtils';
 
 const News = (): ReactNode => {
   const { page } = useParams();
-  const [state, setState] = useState(DEFAULT_STATE);
+
   const context: INewsContext = DEFAULT_NEWS_CONTEXT;
+
+  const [hasError, setError] = useState(false);
+  const [searchValue, setSearchValue] = useState(context.query);
+  const [perPage, setPerPage] = useState(context.limit);
+
+  const navigate = useNavigate();
+
   const [fetching, isLoading] = useFetching(async (): Promise<void> => {
-    const { query, limit } = state;
-    const response: APIResponse = await getArticles(query, page || '1', limit);
-    console.log(response.articles);
-    setState({
-      ...state,
-      page: page || '1',
-      total: response.totalResults,
-    });
+    const { query, limit } = context;
+    const pageNum = page || context.page;
+    const response: APIResponse = await getArticles(query, pageNum, limit);
     context.articles = response.articles || [];
-    context.page = page || '1';
-    context.limit = limit;
-    context.query = query;
+    context.total = response.totalResults;
+    context.page = pageNum;
+    setNewsRecords(query, pageNum, limit);
   });
 
   useEffect(() => {
     fetching();
-  }, [state.query, page, state.limit]);
+  }, [context.query, page, context.limit]);
 
   const onSearchBtnClick = async (): Promise<void> => {
-    setRecord('page', '1');
-    setRecord('query', state.inputValue);
-    setState({ ...state, query: state.inputValue, page: '1' });
+    context.query = searchValue;
+    navigate(`/${Pages.MAIN}/1`);
   };
 
   const onSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    setState({ ...state, inputValue: event.target.value });
+    setSearchValue(event.target.value);
   };
 
   const onErrorBtnClick = (): void => {
-    setState({ ...state, hasError: true });
+    setError(true);
   };
 
   const onSelectChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
-    setRecord('limit', event.target.value);
-    setRecord('page', '1');
-    setState({ ...state, limit: event.target.value, page: '1' });
+    const limit: string = event.target.value;
+    setPerPage(limit);
+    context.limit = limit;
+    navigate(`/${Pages.MAIN}/1`);
   };
+
+  if (hasError) throw new Error();
 
   return (
     <div className={styles.news}>
@@ -79,7 +82,7 @@ const News = (): ReactNode => {
             inputProps={{
               className: styles.input,
               placeholder: SEARCH_PLACEHOLDER,
-              value: state.inputValue,
+              value: searchValue,
               onChange: onSearchInputChange,
             }}
             btnProps={{
@@ -93,7 +96,7 @@ const News = (): ReactNode => {
           <Select
             {...{
               ...SELECT_PARAMS,
-              value: state.limit,
+              value: perPage,
               onChange: onSelectChange,
             }}
           ></Select>
@@ -102,12 +105,7 @@ const News = (): ReactNode => {
           {SEARCH_RESULT_TITLE_TEXT}
         </h2>
         {isLoading ? <Loader /> : <NewsList />}
-        <Pagination
-          {...{
-            ...state,
-            pathTemplate: Pages.MAIN,
-          }}
-        />
+        <Pagination {...{ ...context, pathTemplate: Pages.MAIN }} />
       </NewsContext.Provider>
     </div>
   );

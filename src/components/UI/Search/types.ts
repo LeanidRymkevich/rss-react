@@ -1,5 +1,3 @@
-import { BtnClickHandler } from 'src/components/UI/Button/types';
-
 export interface SearchProps {
   wrapperClass?: string;
   inputProps: {
@@ -10,7 +8,7 @@ export interface SearchProps {
   };
   btnProps: {
     className?: string;
-    onClick: BtnClickHandler;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
   };
 }
 
