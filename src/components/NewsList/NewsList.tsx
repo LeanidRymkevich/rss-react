@@ -1,15 +1,19 @@
 import styles from 'src/components/NewsList/NewsList.module.scss';
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { NewsItem } from 'src/components/NewsItem/NewsItem';
 import { NewsItemProps } from 'src/components/NewsItem/types';
-import { NewsListProps } from 'src/components/NewsList/types';
+import NewsContext from 'src/pages/News/NewsContext';
+import { getNewsItemProps } from 'src/utils/NewsPageUtils';
 
 const NO_RESULT_FOUND_RESPONSE = 'There are no results for this request';
 
-const NewsList = ({ items }: NewsListProps): ReactNode => {
-  return items.length !== 0 ? (
+const NewsList = (): ReactNode => {
+  const context = useContext(NewsContext);
+  const params: NewsItemProps[] = getNewsItemProps(context);
+
+  return params.length !== 0 ? (
     <ul className={styles.news_list}>
-      {items.map((item: NewsItemProps): ReactNode => {
+      {params.map((item: NewsItemProps): ReactNode => {
         return <NewsItem key={Date.now() + item.itemNum} {...item} />;
       })}
     </ul>

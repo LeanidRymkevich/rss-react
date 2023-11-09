@@ -1,5 +1,5 @@
 import { SelectParams } from 'src/components/UI/Select/types';
-import { NewsState } from 'src/pages/News/types';
+import { INewsContext, NewsState } from 'src/pages/News/types';
 import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 const SEARCH_PLACEHOLDER = 'Write your request here';
@@ -23,10 +23,16 @@ const SELECT_PARAMS: Pick<SelectParams, 'defaultOption' | 'options'> = {
   ],
 };
 
+const DEFAULT_NEWS_CONTEXT: INewsContext = {
+  query: '',
+  articles: [],
+};
+
 export {
   SEARCH_PLACEHOLDER,
   ERROR_BTN_TEXT,
   SEARCH_RESULT_TITLE_TEXT,
   DEFAULT_STATE,
   SELECT_PARAMS,
+  DEFAULT_NEWS_CONTEXT,
 };
