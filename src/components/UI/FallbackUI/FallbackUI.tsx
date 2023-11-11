@@ -5,9 +5,14 @@ import styles from 'src/pages/News/News.module.scss';
 
 import Button from 'src/components/UI/Button/Button';
 
-const FALLBACK_MESSAGE =
+import {
+  DIV_TEST_ID,
+  P_TEST_ID,
+} from 'src/components/UI/FallbackUI/FallbackUI.test';
+
+export const FALLBACK_MESSAGE =
   'Something goes wrong! To reload page press the button below.';
-const BTN_TEXT = 'Reload';
+export const BTN_TEXT = 'Reload';
 
 const FallbackUI = (): ReactNode => {
   const reload = (): void => {
@@ -15,8 +20,10 @@ const FallbackUI = (): ReactNode => {
   };
 
   return (
-    <div className={scss.fallbackUI}>
-      <p className={scss.text}>{FALLBACK_MESSAGE}</p>
+    <div data-testid={DIV_TEST_ID} className={scss.fallbackUI}>
+      <p data-testid={P_TEST_ID} className={scss.text}>
+        {FALLBACK_MESSAGE}
+      </p>
       <Button className={styles.btn} onClick={reload}>
         {BTN_TEXT}
       </Button>
