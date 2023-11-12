@@ -25,4 +25,4 @@ window.addEventListener('beforeunload', (): void => {
   });
 });
 
-export { state, setRecord };
+export { state, setRecord, loadState };
