@@ -7,8 +7,8 @@ import FallbackUI, {
   FALLBACK_MESSAGE,
 } from 'src/components/UI/FallbackUI/FallbackUI';
 
-export const DIV_TEST_ID = 'div-test-id';
-export const P_TEST_ID = 'p-test-id';
+const DIV_TEST_ID = 'div-test-id';
+const P_TEST_ID = 'p-test-id';
 
 describe('Fallback component', (): void => {
   beforeEach(

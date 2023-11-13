@@ -10,7 +10,7 @@ import { ReactNode, useState } from 'react';
 import { SelectParams } from 'src/components/UI/Select/types';
 import Select from 'src/components/UI/Select/Select';
 
-export const TEST_ID = 'test-select';
+const TEST_ID = 'test-select';
 
 const props: Omit<SelectParams, 'value' | 'onChange'> = {
   defaultOption: 'Choose number',

@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import styles from 'src/pages/News/News.module.scss';
 
 import { SelectParams, OptionParams } from 'src/components/UI/Select/types';
-import { TEST_ID } from 'src/components/UI/Select/Select.test';
 
 const Select = ({
   defaultOption,
@@ -13,7 +12,7 @@ const Select = ({
 }: SelectParams): ReactNode => {
   return (
     <select
-      data-testid={TEST_ID}
+      data-testid="test-select"
       className={styles.btn}
       value={value}
       onChange={onChange}
