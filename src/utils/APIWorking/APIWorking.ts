@@ -1,8 +1,8 @@
 import { APIResponse, Article } from 'src/utils/APIWorking/types';
 import * as constants from 'src/utils/APIWorking/constants';
-import { state } from '../StorageWorking/StorageWorking';
+import { state } from 'src/utils/StorageWorking/StorageWorking';
 
-function makeUrl(query: string, page: string, limit: string): URL {
+export function makeUrl(query: string, page: string, limit: string): URL {
   let url: URL;
 
   if (query) {
@@ -36,8 +36,7 @@ export async function getArticle(
   limit: string
 ): Promise<Article> {
   const { query } = state;
-  const response: Response = await fetch(makeUrl(query, page, limit));
-  const apiResponse: APIResponse = await response.json();
+  const apiResponse: APIResponse = await getArticles(query, page, limit);
   const articles: Article[] | undefined = apiResponse.articles;
   if (!articles) throw new Error('Error ing getArticle');
   return articles[id - 1];
