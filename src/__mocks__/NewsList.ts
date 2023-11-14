@@ -1,7 +1,7 @@
 import { INewsContext } from 'src/pages/News/types';
 import { Article } from 'src/utils/APIWorking/types';
 
-const articles: Article[] = [
+export const articles: Article[] = [
   {
     source: {
       id: 'business-insider',

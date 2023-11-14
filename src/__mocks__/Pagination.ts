@@ -1,10 +1,9 @@
-import { Pages } from 'src/components/Router/Router';
 import { PaginationProps } from 'src/components/UI/Pagination/types';
 
 const props: PaginationProps = {
   total: 100,
   limit: '10',
-  pathTemplate: Pages.MAIN,
+  pathTemplate: 'main',
 };
 
 const PAGINATION_TEST_ID = 'pagination';

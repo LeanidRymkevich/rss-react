@@ -11,7 +11,7 @@ import RouterLayout from 'src/components/layouts/RouterLayout/RouterLayout';
 import Pagination from 'src/components/UI/Pagination/Pagination';
 import { Pages } from 'src/components/Router/Router';
 
-describe('test Details card component', (): void => {
+describe('test Pagination component', (): void => {
   beforeEach(() =>
     render(
       <MemoryRouter>
