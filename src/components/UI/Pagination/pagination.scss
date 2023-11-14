@@ -24,9 +24,10 @@
     cursor: pointer;
     filter: contrast(200%);
   }
+
+  &.active {
+    background-color: $details-font-color;
+    pointer-events: none;
+  }
 }
 
-.bullet_active {
-  background-color: $details-font-color;
-  pointer-events: none;
-}
