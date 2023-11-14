@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import styles from 'src/components/NewsItem/NewsItems.module.scss';
 
+import { ITEM_TEST_ID } from 'src/__mocks__/NewsList';
+
 import { NewsItemProps } from 'src/components/NewsItem/types';
 import { Pages } from 'src/components/Router/Router';
 
@@ -18,7 +20,7 @@ const NewsItem = ({
   author,
 }: NewsItemProps): ReactNode => {
   return (
-    <li className={styles.newsItem}>
+    <li data-testid={ITEM_TEST_ID} className={styles.newsItem}>
       <div className={styles.newsItem__number}>{itemNum}</div>
       <div className={styles.newsItem__content}>
         <p>
