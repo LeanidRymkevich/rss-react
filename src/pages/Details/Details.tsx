@@ -29,6 +29,7 @@ import {
   AUTHOR_SUBTITLE,
   PUBLISHER_SUBTITLE,
 } from 'src/components/NewsItem/NewsItem';
+import { DETAILS_TEST_ID } from 'src/__mocks__/NewsItem';
 
 const Details = (): ReactNode => {
   const { id, page } = useParams();
@@ -66,7 +67,11 @@ const Details = (): ReactNode => {
   };
 
   return (
-    <section className={styles.details} onClick={onSectionClick}>
+    <section
+      data-testid={DETAILS_TEST_ID}
+      className={styles.details}
+      onClick={onSectionClick}
+    >
       {isLoading ? (
         <Loader />
       ) : (
