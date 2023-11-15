@@ -29,7 +29,12 @@ import {
   AUTHOR_SUBTITLE,
   PUBLISHER_SUBTITLE,
 } from 'src/components/NewsItem/NewsItem';
-import { DETAILS_TEST_ID } from 'src/__mocks__/NewsItem';
+import {
+  AUTHOR_TEST_ID,
+  DETAILS_TEST_ID,
+  PUBLISHER_TEST_ID,
+} from 'src/__mocks__/NewsItem';
+import { IMAGE_TEST_ID, LINK_TEST_ID } from 'src/__mocks__/Details';
 
 const Details = (): ReactNode => {
   const { id, page } = useParams();
@@ -40,10 +45,10 @@ const Details = (): ReactNode => {
 
   const [article, setArticle] = useState(DEFAULT_ARTICLE);
 
-  if (!id) throw new Error('Invalid details ID');
+  // if (!id) throw new Error('Invalid details ID');
 
   const [fetching, isLoading] = useFetching(async (): Promise<void> => {
-    const articleID: number = +id - ((page ? +page : 1) - 1) * +state.limit;
+    const articleID: number = +id! - ((page ? +page : 1) - 1) * +state.limit;
     const article: Article = await getArticle(
       articleID,
       page || '1',
@@ -77,6 +82,7 @@ const Details = (): ReactNode => {
       ) : (
         <>
           <img
+            data-testid={IMAGE_TEST_ID}
             className={styles.img}
             src={article.urlToImage || newsImgSRC}
             alt={IMG_ALT_TEXT}
@@ -86,13 +92,13 @@ const Details = (): ReactNode => {
             <span className={newsItemStyles.newsItem__subtitle}>
               {PUBLISHER_SUBTITLE}
             </span>
-            <span>{article.source.name}</span>
+            <span data-testid={PUBLISHER_TEST_ID}>{article.source.name}</span>
           </p>
           <p>
             <span className={newsItemStyles.newsItem__subtitle}>
               {AUTHOR_SUBTITLE}
             </span>
-            <span>{article.author}</span>
+            <span data-testid={AUTHOR_TEST_ID}>{article.author}</span>
           </p>
           <p>
             <span className={newsItemStyles.newsItem__subtitle}>
@@ -105,7 +111,7 @@ const Details = (): ReactNode => {
               )}
             </span>
           </p>
-          <a href={article.url} target={LINK_TARGET}>
+          <a data-testid={LINK_TEST_ID} href={article.url} target={LINK_TARGET}>
             {LINK_TEXT}
           </a>
           <Button

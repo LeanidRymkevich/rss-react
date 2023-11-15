@@ -14,6 +14,7 @@ import {
   SEARCH_PLACEHOLDER,
   SELECT_PARAMS,
 } from 'src/components/SearchBar/constants';
+import { ERROR_BTN_TEST_ID } from 'src/__mocks__/SearchBar';
 
 const SearchBar = (): ReactNode => {
   const context = useContext(NewsContext);
@@ -65,7 +66,11 @@ const SearchBar = (): ReactNode => {
           onClick: onSearchBtnClick,
         }}
       />
-      <Button className={styles.btn} onClick={onErrorBtnClick}>
+      <Button
+        data-testid={ERROR_BTN_TEST_ID}
+        className={styles.btn}
+        onClick={onErrorBtnClick}
+      >
         {ERROR_BTN_TEXT}
       </Button>
       <Select

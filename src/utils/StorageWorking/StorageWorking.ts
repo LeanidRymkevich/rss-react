@@ -17,12 +17,7 @@ const state: State = loadState();
 
 const setRecord = (key: keyof State, value: string): void => {
   state[key] = value;
+  localStorage.setItem(key as string, value);
 };
-
-window.addEventListener('beforeunload', (): void => {
-  Object.entries(state).forEach(([key, value]): void => {
-    localStorage.setItem(key, value);
-  });
-});
 
 export { state, setRecord, loadState };
