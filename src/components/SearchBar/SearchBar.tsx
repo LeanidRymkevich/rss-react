@@ -14,7 +14,7 @@ import {
   SEARCH_PLACEHOLDER,
   SELECT_PARAMS,
 } from 'src/components/SearchBar/constants';
-import { ERROR_BTN_TEST_ID } from 'src/__mocks__/SearchBar';
+import { ERROR_BTN_TEST_ID, SEARCH_BAR_TEST_ID } from 'src/__mocks__/SearchBar';
 
 const SearchBar = (): ReactNode => {
   const context = useContext(NewsContext);
@@ -52,7 +52,7 @@ const SearchBar = (): ReactNode => {
   if (hasError) throw new Error();
 
   return (
-    <section className={styles.search_wrapper}>
+    <section data-testid={SEARCH_BAR_TEST_ID} className={styles.search_wrapper}>
       <Search
         wrapperClass={styles.search}
         inputProps={{
