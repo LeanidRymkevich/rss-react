@@ -4,7 +4,6 @@ import {
   APIQueryParams,
   APIResponse,
   Article,
-  NewsReducerPaths,
 } from 'src/utils/APIWorking/types';
 import * as constants from 'src/utils/APIWorking/constants';
 
@@ -23,31 +22,23 @@ export function makeUrl(query: string, page: string, limit: string): string {
 }
 
 export const newsAPI = createApi({
-  reducerPath: NewsReducerPaths.ROOT,
+  reducerPath: 'newsAPI',
   baseQuery: fetchBaseQuery({ baseUrl: constants.BASE_URL }),
   endpoints: (builder) => ({
-    [NewsReducerPaths.GET_ALL_NEWS]: builder.query({
+    getAllNews: builder.query<APIResponse, APIQueryParams>({
       query: (
         { query, page, limit }: APIQueryParams = constants.DEFAULT_QUERY_PARAMS
       ) => makeUrl(query, page, limit),
     }),
-    [NewsReducerPaths.GET_NEWS_BY_ID]: builder.query({
-      // query: ({ id, query, page, limit }) => makeUrl(query, page, limit),
-      queryFn: async (id, query, page, limit) => {
-        try {
-          const response: APIResponse = await newsAPI.endpoints[
-            NewsReducerPaths.GET_ALL_NEWS
-          ](query, page, limit);
-          // Return the result in an object with a `data` field
-          const articles: Article[] | undefined = response.articles;
-          if (!articles) throw new Error('No data for that request!');
-          return articles[id];
-        } catch (error) {
-          return { error };
-        }
-      },
-    }),
   }),
 });
 
-export const { useGetAllNewsQuery, useGetNewsByIDQuery } = newsAPI;
+export const { useGetAllNewsQuery } = newsAPI;
+
+export const getArticleFromResponse = (
+  id: number,
+  response: APIResponse
+): Article | null => {
+  const articles: Article[] | undefined = response.articles;
+  return articles ? articles[id] : null;
+};

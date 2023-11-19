@@ -22,5 +22,4 @@ export interface APIQueryParams {
   query: string;
   page: string;
   limit: string;
-  id?: string;
 }
