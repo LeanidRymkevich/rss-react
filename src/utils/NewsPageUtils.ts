@@ -1,13 +1,14 @@
 import { NewsItemProps } from 'src/components/NewsItem/types';
 import { Article } from 'src/utils/APIWorking/types';
 import { FREE_API_RESULTS_LIMIT } from 'src/utils/APIWorking/constants';
-import { INewsContext } from 'src/pages/News/types';
+import { NewsState } from 'src/redux_store/newsSlice/types';
 import { setRecord } from 'src/utils/StorageWorking/StorageWorking';
+
 const getNewsItemProps = ({
   articles,
   page,
   limit,
-}: INewsContext): NewsItemProps[] => {
+}: Omit<NewsState, 'status'>): NewsItemProps[] => {
   return articles.map((item: Article, idx: number): NewsItemProps => {
     return {
       itemNum: `${idx + 1 + (+page - 1) * +limit}`,
