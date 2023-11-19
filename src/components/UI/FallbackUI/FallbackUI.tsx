@@ -4,6 +4,7 @@ import scss from 'src/components/UI/FallbackUI/FallbackUI.module.scss';
 import styles from 'src/components/SearchBar/SearchBar.module.scss';
 
 import Button from 'src/components/UI/Button/Button';
+import { FALLBACK_TEST_ID, PARAGRAPH_TEST_ID } from 'src/__mocks__/FallbackUI';
 
 export const FALLBACK_MESSAGE =
   'Something goes wrong! To reload page press the button below.';
@@ -15,8 +16,8 @@ const FallbackUI = (): ReactNode => {
   };
 
   return (
-    <div data-testid="div-test-id" className={scss.fallbackUI}>
-      <p data-testid="p-test-id" className={scss.text}>
+    <div data-testid={FALLBACK_TEST_ID} className={scss.fallbackUI}>
+      <p data-testid={PARAGRAPH_TEST_ID} className={scss.text}>
         {FALLBACK_MESSAGE}
       </p>
       <Button className={styles.btn} onClick={reload}>

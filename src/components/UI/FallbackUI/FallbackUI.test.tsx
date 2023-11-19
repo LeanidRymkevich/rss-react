@@ -6,9 +6,7 @@ import FallbackUI, {
   BTN_TEXT,
   FALLBACK_MESSAGE,
 } from 'src/components/UI/FallbackUI/FallbackUI';
-
-const DIV_TEST_ID = 'div-test-id';
-const P_TEST_ID = 'p-test-id';
+import { FALLBACK_TEST_ID, PARAGRAPH_TEST_ID } from 'src/__mocks__/FallbackUI';
 
 describe('Fallback component', (): void => {
   beforeEach(
@@ -17,15 +15,17 @@ describe('Fallback component', (): void => {
   );
 
   test(`it's in the document`, () => {
-    expect(screen.getByTestId(DIV_TEST_ID)).toBeInTheDocument();
+    expect(screen.getByTestId(FALLBACK_TEST_ID)).toBeInTheDocument();
   });
 
   test(`paragraph in the document`, () => {
-    expect(screen.getByTestId(P_TEST_ID)).toBeInTheDocument();
+    expect(screen.getByTestId(PARAGRAPH_TEST_ID)).toBeInTheDocument();
   });
 
   test(`paragraph contains fallback message`, () => {
-    expect(screen.getByTestId(P_TEST_ID)).toHaveTextContent(FALLBACK_MESSAGE);
+    expect(screen.getByTestId(PARAGRAPH_TEST_ID)).toHaveTextContent(
+      FALLBACK_MESSAGE
+    );
   });
 
   test(`button in the document`, () => {
