@@ -11,7 +11,7 @@ export interface NewsState {
 }
 
 export const initialState: NewsState = {
-  isLoading: false,
+  isLoading: true,
   ...state,
   total: 0,
   articles: [],
