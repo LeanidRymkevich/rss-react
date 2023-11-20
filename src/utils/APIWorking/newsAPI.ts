@@ -40,5 +40,5 @@ export const getArticleFromResponse = (
 ): Article | null => {
   if (!response) return null;
   const articles: Article[] | undefined = response.articles;
-  return articles ? articles[id] : null;
+  return articles ? articles[id - 1] : null;
 };
