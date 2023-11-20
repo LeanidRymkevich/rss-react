@@ -1,0 +1,21 @@
+@import 'src/common_styles/variables.scss';
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc(0.3vw + 0.5vh + 4px);
+  color: $main-font-color;
+  font-family: $main-font;
+}
+
+body {
+  background-color: $body-background;
+}
+
+#root {
+  width: 100%;
+}
