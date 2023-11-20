@@ -12,12 +12,30 @@ import {
 } from 'src/utils/NewsPageUtils';
 
 describe('Tests for getNewsItemProps function', (): void => {
+  test('it returns empty array if no articles are passed', (): void => {
+    expect(
+      getNewsItemProps(undefined, mockInput_1.page, mockInput_1.limit)
+    ).toEqual([]);
+  });
+
   test('it returns appropriate values', (): void => {
-    expect(getNewsItemProps(mockInput_1)).toEqual(mockOutput_1);
+    expect(
+      getNewsItemProps(
+        mockInput_1.articles,
+        mockInput_1.page,
+        mockInput_1.limit
+      )
+    ).toEqual(mockOutput_1);
   });
 
   test('it returns "none" string for null properties', (): void => {
-    expect(getNewsItemProps(mockInput_2)).toEqual(mockOutput_2);
+    expect(
+      getNewsItemProps(
+        mockInput_2.articles,
+        mockInput_2.page,
+        mockInput_2.limit
+      )
+    ).toEqual(mockOutput_2);
   });
 });
 

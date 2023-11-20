@@ -1,4 +1,3 @@
-import { INewsContext } from 'src/pages/News/types';
 import { Article } from 'src/utils/APIWorking/types';
 
 export const articles: Article[] = [
@@ -170,14 +169,6 @@ export const articles: Article[] = [
       'Traders work on the floor of the New York Stock Exchange (NYSE) on March 28, 2023 in New York City.Spencer Platt/Getty Images\r\n<ul>\n<li>The Dow jumped over 500 points while the S&P 500 neared its big… [+2576 chars]',
   },
 ];
-
-export const contextMock: INewsContext = {
-  query: '',
-  articles: articles,
-  page: '1',
-  limit: '10',
-  total: 10,
-};
 
 export const LIST_TEST_ID = 'list';
 export const ITEM_TEST_ID = 'list-item';

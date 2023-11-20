@@ -1,12 +1,10 @@
-import { contextMock } from 'src/__mocks__/NewsList';
 import { NewsItemProps } from 'src/components/NewsItem/types';
 
-const itemNum = 0;
 const testData: NewsItemProps = {
-  itemNum: `${itemNum + 1}`,
-  publisher: contextMock.articles[itemNum].source.name,
-  description: contextMock.articles[itemNum].description || 'none',
-  author: contextMock.articles[itemNum].author || 'none',
+  itemNum: '1',
+  publisher: 'New York Times',
+  description: 'Some description',
+  author: 'Tom Johnson',
 };
 
 const ITEM_NUM_TEST_ID = 'item-num';

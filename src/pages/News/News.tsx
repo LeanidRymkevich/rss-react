@@ -34,7 +34,6 @@ const News = (): ReactNode => {
   });
 
   useEffect(() => {
-    console.log(isLoading);
     dispatch(setNewIsLoading(isFetching));
     dispatch(setPage(page || pageNum));
     if (!isFetching) {

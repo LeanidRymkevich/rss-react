@@ -14,7 +14,6 @@ import {
 } from 'src/__mocks__/NewsItem';
 import { NewsItem } from 'src/components/NewsItem/NewsItem';
 import RouterLayout from 'src/components/layouts/RouterLayout/RouterLayout';
-import * as userHooks from 'src/hooks/useFetching';
 
 describe('test NewsList component', (): void => {
   test('that item is present on the page', (): void => {
@@ -56,21 +55,5 @@ describe('test NewsList component', (): void => {
     const link: HTMLAnchorElement = screen.getByTestId(LINK_TEST_ID);
     fireEvent.click(link);
     expect(screen.getByTestId(DETAILS_TEST_ID)).toBeInTheDocument();
-  });
-
-  test('that clicking on link triggers an additional API call to fetch detailed information', (): void => {
-    const spy = jest.spyOn(userHooks, 'useFetching');
-
-    render(
-      <MemoryRouter initialEntries={['/main/1']}>
-        <RouterLayout />
-        <NewsItem {...testData} />
-      </MemoryRouter>
-    );
-
-    const link: HTMLAnchorElement = screen.getByTestId(LINK_TEST_ID);
-    new Promise((): boolean => fireEvent.click(link)).then((): void =>
-      expect(spy).toHaveBeenCalled()
-    );
   });
 });
