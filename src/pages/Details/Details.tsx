@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import styles from 'src/pages/Details/styles.module.scss';
@@ -7,8 +7,6 @@ import newsItemStyles from 'src/components/NewsItem/NewsItems.module.scss';
 
 import { Article } from 'src/utils/APIWorking/types';
 import { getRidOfDetailsInPath } from 'src/utils/MainPageUtils';
-import { useFetching } from 'src/hooks/useFetching';
-import { getArticle } from 'src/utils/APIWorking/APIWorking';
 import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 import Button from 'src/components/UI/Button/Button';
@@ -23,7 +21,7 @@ import {
   LINK_TARGET,
   SEARCHED_IN_CONTENT_CHAR,
   LINK_TEXT,
-  DEFAULT_ARTICLE,
+  ERROR_TEXT,
 } from 'src/pages/Details/constants';
 import {
   AUTHOR_SUBTITLE,
@@ -35,6 +33,15 @@ import {
   PUBLISHER_TEST_ID,
 } from 'src/__mocks__/NewsItem';
 import { IMAGE_TEST_ID, LINK_TEST_ID } from 'src/__mocks__/Details';
+import {
+  getArticleFromResponse,
+  useGetAllNewsQuery,
+} from 'src/utils/APIWorking/newsAPI';
+import { useAppDispatch, useAppSelector } from 'src/hooks/reduxHooks';
+import {
+  setDetails,
+  setDetailsLoading,
+} from 'src/redux_store/detailsSlice/detailsSlice';
 
 const Details = (): ReactNode => {
   const { id, page } = useParams();
@@ -43,23 +50,24 @@ const Details = (): ReactNode => {
 
   const location = useLocation();
 
-  const [article, setArticle] = useState(DEFAULT_ARTICLE);
-
-  // if (!id) throw new Error('Invalid details ID');
-
-  const [fetching, isLoading] = useFetching(async (): Promise<void> => {
-    const articleID: number = +id! - ((page ? +page : 1) - 1) * +state.limit;
-    const article: Article = await getArticle(
-      articleID,
-      page || '1',
-      state.limit
-    );
-    setArticle(article);
+  const dispatch = useAppDispatch();
+  const isLoading: boolean = useAppSelector((state) => state.details.isLoading);
+  const pageNum: string = useAppSelector((state) => state.news.page);
+  const limit: string = useAppSelector((state) => state.news.limit);
+  const query: string = useAppSelector((state) => state.news.query);
+  const { data, isFetching } = useGetAllNewsQuery({
+    limit,
+    page: page || pageNum,
+    query,
   });
 
+  const articleID: number = +id! - ((page ? +page : 1) - 1) * +state.limit;
+  const article: Article | null = getArticleFromResponse(articleID, data);
+
   useEffect(() => {
-    fetching();
-  }, [id]);
+    dispatch(setDetailsLoading(isFetching));
+    dispatch(setDetails(article));
+  }, [data, isFetching]);
 
   const onBtnClick = (): void => {
     const path: string = location.pathname;
@@ -79,7 +87,7 @@ const Details = (): ReactNode => {
     >
       {isLoading ? (
         <Loader />
-      ) : (
+      ) : article ? (
         <>
           <img
             data-testid={IMAGE_TEST_ID}
@@ -122,6 +130,8 @@ const Details = (): ReactNode => {
             {BTN_TEXT}
           </Button>
         </>
+      ) : (
+        <p>{ERROR_TEXT}</p>
       )}
     </section>
   );

@@ -11,14 +11,13 @@ export function makeUrl(query: string, page: string, limit: string): string {
   const endpoint: string = query
     ? constants.EVERYTHING_ENDPOINT
     : constants.TOP_HEADLINES_ENDPOINT;
-
-  return (
-    endpoint +
-    `?${constants.LANGUAGE_PARAM}=${constants.LANGUAGE}` +
+  const search: string = query ? `${constants.SEARCH_PARAM}=${query}` : '';
+  const params =
+    `${constants.LANGUAGE_PARAM}=${constants.LANGUAGE}` +
     `&${constants.ITEMS_PER_PAGE_PARAM}=${limit}` +
     `&${constants.PAGE_NUMBER_PARAM}=${page}` +
-    `&${constants.API_KEY_PARAM}=${constants.API_KEY}`
-  );
+    `&${constants.API_KEY_PARAM}=${constants.API_KEY}`;
+  return search ? `${endpoint}?${search}&${params}` : `${endpoint}?${params}`;
 }
 
 export const newsAPI = createApi({
@@ -37,8 +36,9 @@ export const { useGetAllNewsQuery } = newsAPI;
 
 export const getArticleFromResponse = (
   id: number,
-  response: APIResponse
+  response: APIResponse | undefined
 ): Article | null => {
+  if (!response) return null;
   const articles: Article[] | undefined = response.articles;
   return articles ? articles[id] : null;
 };

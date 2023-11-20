@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from 'src/redux_store/store';
 
-import { QueryStatus, initialState } from 'src/redux_store/newsSlice/types';
+import { initialState } from 'src/redux_store/newsSlice/types';
 import { APIResponse, Article } from 'src/utils/APIWorking/types';
 
 export const newsSlice = createSlice({
@@ -23,18 +23,18 @@ export const newsSlice = createSlice({
     setLimit(state, action: PayloadAction<string>) {
       state.limit = action.payload;
     },
-    setStatus(state, action: PayloadAction<QueryStatus>) {
-      state.status = action.payload;
+    setNewIsLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
     },
   },
 });
 
-export const { setNews, setQuery, setPage, setLimit, setStatus } =
+export const { setNews, setQuery, setPage, setLimit, setNewIsLoading } =
   newsSlice.actions;
 
 export const selectNews = (state: RootState) => state.news.articles;
 export const selectQuery = (state: RootState) => state.news.query;
 export const selectLimit = (state: RootState) => state.news.limit;
-export const selectNewsStatus = (state: RootState) => state.news.status;
+export const selectNewIsLoading = (state: RootState) => state.news.isLoading;
 
 export default newsSlice.reducer;
