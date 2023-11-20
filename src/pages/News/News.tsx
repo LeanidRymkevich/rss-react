@@ -13,9 +13,13 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/reduxHooks';
 import { useParams } from 'react-router-dom';
 import { NO_RESULTS_TEST_ID } from 'src/__mocks__/NewsList';
 import { NewsItemProps } from 'src/components/NewsItem/types';
-import { setNewIsLoading, setNews } from 'src/redux_store/newsSlice/newsSlice';
+import {
+  setNewIsLoading,
+  setNews,
+  setPage,
+} from 'src/redux_store/newsSlice/newsSlice';
 import { useGetAllNewsQuery } from 'src/utils/APIWorking/newsAPI';
-import { getNewsItemProps } from 'src/utils/NewsPageUtils';
+import { getNewsItemProps, setNewsRecords } from 'src/utils/NewsPageUtils';
 
 const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
@@ -23,6 +27,7 @@ const News = (): ReactNode => {
   const { page } = useParams();
 
   const dispatch = useAppDispatch();
+  const isLoading: boolean = useAppSelector((store) => store.news.isLoading);
   const pageNum: string = useAppSelector((state) => state.news.page);
   const limit: string = useAppSelector((state) => state.news.limit);
   const query: string = useAppSelector((state) => state.news.query);
@@ -34,12 +39,12 @@ const News = (): ReactNode => {
 
   useEffect(() => {
     dispatch(setNewIsLoading(isFetching));
+    dispatch(setPage(page || pageNum));
     if (!isFetching) {
       dispatch(setNews(data!));
     }
+    setNewsRecords(query, pageNum, limit);
   }, [data, isFetching]);
-
-  const isLoading: boolean = useAppSelector((store) => store.news.isLoading);
 
   if (!data || !data.articles || data.articles.length === 0) {
     return (
