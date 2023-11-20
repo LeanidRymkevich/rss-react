@@ -1,13 +1,13 @@
 import { NewsItemProps } from 'src/components/NewsItem/types';
 import { Article } from 'src/utils/APIWorking/types';
 import { FREE_API_RESULTS_LIMIT } from 'src/utils/APIWorking/constants';
-import { INewsContext } from 'src/pages/News/types';
 import { setRecord } from 'src/utils/StorageWorking/StorageWorking';
-const getNewsItemProps = ({
-  articles,
-  page,
-  limit,
-}: INewsContext): NewsItemProps[] => {
+
+const getNewsItemProps = (
+  articles: Article[],
+  page: string,
+  limit: string
+): NewsItemProps[] => {
   return articles.map((item: Article, idx: number): NewsItemProps => {
     return {
       itemNum: `${idx + 1 + (+page - 1) * +limit}`,

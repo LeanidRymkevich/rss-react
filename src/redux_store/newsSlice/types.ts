@@ -1,9 +1,8 @@
 import { Article } from 'src/utils/APIWorking/types';
-
-export type QueryStatus = 'idle' | 'loading' | 'succeeded' | 'failed';
+import { state } from 'src/utils/StorageWorking/StorageWorking';
 
 export interface NewsState {
-  status: QueryStatus;
+  isLoading: boolean;
   query: string;
   page: string;
   limit: string;
@@ -12,10 +11,8 @@ export interface NewsState {
 }
 
 export const initialState: NewsState = {
-  status: 'idle',
-  query: '',
-  page: '1',
-  limit: '10',
+  isLoading: true,
+  ...state,
   total: 0,
   articles: [],
 };

@@ -17,3 +17,9 @@ export interface Article {
   publishedAt: string;
   content: string;
 }
+
+export interface APIQueryParams {
+  query: string;
+  page: string;
+  limit: string;
+}

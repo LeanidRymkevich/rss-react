@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from 'src/components/SearchBar/SearchBar.module.scss';
@@ -6,7 +6,6 @@ import styles from 'src/components/SearchBar/SearchBar.module.scss';
 import Search from 'src/components/UI/Search/Search';
 import Button from 'src/components/UI/Button/Button';
 import Select from 'src/components/UI/Select/Select';
-import NewsContext from 'src/pages/News/NewsContext';
 import { Pages } from 'src/components/Router/Router';
 
 import {
@@ -15,18 +14,22 @@ import {
   SELECT_PARAMS,
 } from 'src/components/SearchBar/constants';
 import { ERROR_BTN_TEST_ID, SEARCH_BAR_TEST_ID } from 'src/__mocks__/SearchBar';
+import { useAppDispatch, useAppSelector } from 'src/hooks/reduxHooks';
+import { setLimit, setQuery } from 'src/redux_store/newsSlice/newsSlice';
 
 const SearchBar = (): ReactNode => {
-  const context = useContext(NewsContext);
-
   const navigate = useNavigate();
 
+  const dispatch = useAppDispatch();
+  const limit: string = useAppSelector((state) => state.news.limit);
+  const query: string = useAppSelector((state) => state.news.query);
+
   const [hasError, setError] = useState(false);
-  const [searchValue, setSearchValue] = useState(context.query);
-  const [perPage, setPerPage] = useState(context.limit);
+  const [searchValue, setSearchValue] = useState(query);
+  const [perPage, setPerPage] = useState(limit);
 
   const onSearchBtnClick = async (): Promise<void> => {
-    context.query = searchValue;
+    dispatch(setQuery(searchValue));
     navigate(`/${Pages.MAIN}/1`);
   };
 
@@ -45,7 +48,7 @@ const SearchBar = (): ReactNode => {
   ): void => {
     const limit: string = event.target.value;
     setPerPage(limit);
-    context.limit = limit;
+    dispatch(setLimit(limit));
     navigate(`/${Pages.MAIN}/1`);
   };
 

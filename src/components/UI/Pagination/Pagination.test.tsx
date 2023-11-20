@@ -2,11 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
-import {
-  BULLET_TEST_ID,
-  PAGINATION_TEST_ID,
-  props,
-} from 'src/__mocks__/Pagination';
+import { BULLET_TEST_ID, PAGINATION_TEST_ID } from 'src/__mocks__/Pagination';
 import RouterLayout from 'src/components/layouts/RouterLayout/RouterLayout';
 import Pagination from 'src/components/UI/Pagination/Pagination';
 import { Pages } from 'src/components/Router/Router';
@@ -16,7 +12,7 @@ describe('test Pagination component', (): void => {
     render(
       <MemoryRouter>
         <RouterLayout />
-        <Pagination {...props} />
+        <Pagination />
       </MemoryRouter>
     )
   );

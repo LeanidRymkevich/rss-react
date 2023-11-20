@@ -1,7 +1,7 @@
 import { NewsItemProps } from 'src/components/NewsItem/types';
-import { INewsContext } from 'src/pages/News/types';
+import { NewsState } from 'src/redux_store/newsSlice/types';
 
-export const mockInput_1: INewsContext = {
+export const mockInput_1: Omit<NewsState, 'status'> = {
   query: '',
   total: 2,
   page: '1',
@@ -57,7 +57,7 @@ export const mockOutput_1: NewsItemProps[] = [
   },
 ];
 
-export const mockInput_2: INewsContext = {
+export const mockInput_2: Omit<NewsState, 'status'> = {
   query: '',
   total: 2,
   page: '1',

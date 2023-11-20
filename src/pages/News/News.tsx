@@ -1,55 +1,71 @@
 import { ReactNode, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 import styles from 'src/pages/News/news.module.scss';
 
-import { useFetching } from 'src/hooks/useFetching';
-import { getArticles } from 'src/utils/APIWorking/APIWorking';
-import { APIResponse } from 'src/utils/APIWorking/types';
-import { setNewsRecords } from 'src/utils/NewsPageUtils';
-
-import NewsList from 'src/components/NewsList/NewsList';
+import {
+  NO_RESULT_FOUND_RESPONSE,
+  NewsList,
+} from 'src/components/NewsList/NewsList';
 import Loader from 'src/components/UI/Loader/Loader';
 import Pagination from 'src/components/UI/Pagination/Pagination';
-import { Pages } from 'src/components/Router/Router';
-import NewsContext from 'src/pages/News/NewsContext';
-import { INewsContext } from 'src/pages/News/types';
 import SearchBar from 'src/components/SearchBar/SearchBar';
-
+import { useAppDispatch, useAppSelector } from 'src/hooks/reduxHooks';
+import { useParams } from 'react-router-dom';
+import { NO_RESULTS_TEST_ID } from 'src/__mocks__/NewsList';
+import { NewsItemProps } from 'src/components/NewsItem/types';
 import {
-  DEFAULT_NEWS_CONTEXT,
-  SEARCH_RESULT_TITLE_TEXT,
-} from 'src/pages/News/constants';
+  setNewIsLoading,
+  setNews,
+  setPage,
+} from 'src/redux_store/newsSlice/newsSlice';
+import { useGetAllNewsQuery } from 'src/utils/APIWorking/newsAPI';
+import { getNewsItemProps, setNewsRecords } from 'src/utils/NewsPageUtils';
+
+const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
 const News = (): ReactNode => {
   const { page } = useParams();
 
-  const context: INewsContext = DEFAULT_NEWS_CONTEXT;
-
-  const [fetching, isLoading] = useFetching(async (): Promise<void> => {
-    const { query, limit } = context;
-    const pageNum = page || context.page;
-    const response: APIResponse = await getArticles(query, pageNum, limit);
-    context.articles = response.articles || [];
-    context.total = response.totalResults;
-    context.page = pageNum;
-    setNewsRecords(query, pageNum, limit);
+  const dispatch = useAppDispatch();
+  const isLoading: boolean = useAppSelector((store) => store.news.isLoading);
+  const pageNum: string = useAppSelector((state) => state.news.page);
+  const limit: string = useAppSelector((state) => state.news.limit);
+  const query: string = useAppSelector((state) => state.news.query);
+  const { data, isFetching } = useGetAllNewsQuery({
+    limit,
+    page: page || pageNum,
+    query,
   });
 
   useEffect(() => {
-    fetching();
-  }, [context.query, page, context.limit]);
+    dispatch(setNewIsLoading(isFetching));
+    dispatch(setPage(page || pageNum));
+    if (!isFetching) {
+      dispatch(setNews(data!));
+    }
+    setNewsRecords(query, pageNum, limit);
+  }, [data, isFetching]);
+
+  if (!data || !data.articles || data.articles.length === 0) {
+    return (
+      <p data-testid={NO_RESULTS_TEST_ID} className={styles.no_results}>
+        {NO_RESULT_FOUND_RESPONSE}
+      </p>
+    );
+  }
+
+  const itemsProps: NewsItemProps[] = getNewsItemProps(
+    data.articles,
+    page || pageNum,
+    limit
+  );
 
   return (
     <div className={styles.news}>
-      <NewsContext.Provider value={context}>
-        <SearchBar />
-        <h2 className={styles.search_result_title}>
-          {SEARCH_RESULT_TITLE_TEXT}
-        </h2>
-        {isLoading ? <Loader /> : <NewsList />}
-        <Pagination {...{ ...context, pathTemplate: Pages.MAIN }} />
-      </NewsContext.Provider>
+      <SearchBar />
+      <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
+      {isLoading ? <Loader /> : <NewsList items={itemsProps} />}
+      <Pagination />
     </div>
   );
 };
