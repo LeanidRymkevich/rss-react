@@ -11,6 +11,10 @@ const config: Config = {
     '.+\\.(css|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
   setupFilesAfterEnv: ['./jest-setup.ts'],
+  setupFiles: ['./jest.polyfills.js'],
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
 };
 
 export default config;

@@ -7,6 +7,7 @@ import { getRidOfDetailsInPath } from 'src/utils/MainPageUtils';
 
 import { Pages } from 'src/components/Router/Router';
 import News from 'src/pages/News/News';
+import { MAIN_LAYOUT_TEST_ID } from 'src/__mocks__/MainLayout';
 
 const MainLayout = (): ReactNode => {
   const navigate = useNavigate();
@@ -28,7 +29,11 @@ const MainLayout = (): ReactNode => {
   };
 
   return (
-    <div className={styles.main_wrapper} onClick={onMainPageClick}>
+    <div
+      data-testid={MAIN_LAYOUT_TEST_ID}
+      className={styles.main_wrapper}
+      onClick={onMainPageClick}
+    >
       <News />
       <Outlet />
     </div>

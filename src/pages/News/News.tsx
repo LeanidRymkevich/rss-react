@@ -16,6 +16,7 @@ import {
 } from 'src/redux_store/newsSlice/newsSlice';
 import { useGetAllNewsQuery } from 'src/utils/APIWorking/newsAPI';
 import { getNewsItemProps, setNewsRecords } from 'src/utils/NewsPageUtils';
+import { NEWS_TEST_ID } from 'src/__mocks__/News';
 
 const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
@@ -49,7 +50,7 @@ const News = (): ReactNode => {
   );
 
   return (
-    <div className={styles.news}>
+    <div data-testid={NEWS_TEST_ID} className={styles.news}>
       <SearchBar />
       <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
       {isLoading ? <Loader /> : <NewsList items={itemsProps} />}
