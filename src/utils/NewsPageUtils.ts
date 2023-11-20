@@ -4,10 +4,11 @@ import { FREE_API_RESULTS_LIMIT } from 'src/utils/APIWorking/constants';
 import { setRecord } from 'src/utils/StorageWorking/StorageWorking';
 
 const getNewsItemProps = (
-  articles: Article[],
+  articles: Article[] | undefined,
   page: string,
   limit: string
 ): NewsItemProps[] => {
+  if (!articles) return [];
   return articles.map((item: Article, idx: number): NewsItemProps => {
     return {
       itemNum: `${idx + 1 + (+page - 1) * +limit}`,

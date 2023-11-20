@@ -6,6 +6,6 @@ export interface DetailsState {
 }
 
 export const initialState: DetailsState = {
-  isLoading: false,
+  isLoading: true,
   article: null,
 };

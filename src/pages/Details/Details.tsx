@@ -67,7 +67,7 @@ const Details = (): ReactNode => {
   useEffect(() => {
     dispatch(setDetailsLoading(isFetching));
     dispatch(setDetails(article));
-  }, [data, isFetching]);
+  }, [isFetching]);
 
   const onBtnClick = (): void => {
     const path: string = location.pathname;
