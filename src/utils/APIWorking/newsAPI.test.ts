@@ -1,11 +1,5 @@
 import { MOCK_RESPONSE } from 'src/__mocks__/FetchMocks';
-import {
-  query,
-  limit,
-  page,
-  result_1,
-  result_2,
-} from 'src/__mocks__/api/newsAPI';
+import { query, limit, page, result_1, result_2 } from 'src/__mocks__/newsAPI';
 import { getArticleFromResponse, makeUrl } from 'src/utils/APIWorking/newsAPI';
 
 describe('makeUrl function', (): void => {
