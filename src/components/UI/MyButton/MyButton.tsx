@@ -1,7 +1,10 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 import { MyButtonProps } from '@src/components/UI/MyButton/types';
 
-const MyButton = ({ children, ...props }: MyButtonProps): ReactNode => {
+const MyButton: FC<MyButtonProps> = ({
+  children,
+  ...props
+}: MyButtonProps): JSX.Element => {
   return <button {...props}>{children}</button>;
 };
 

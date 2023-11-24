@@ -1,15 +1,14 @@
-import { ReactNode } from 'react';
-
 import styles from '@src/pages/main/main.module.scss';
 
 import { SelectParams, OptionParams } from '@src/components/UI/Select/types';
+import { FC } from 'react';
 
-const Select = ({
+const Select: FC<SelectParams> = ({
   defaultOption,
   options,
   value,
   onChange,
-}: SelectParams): ReactNode => {
+}: SelectParams): JSX.Element => {
   return (
     <select
       data-testid="test-select"
@@ -20,7 +19,7 @@ const Select = ({
       <option disabled value="">
         {defaultOption}
       </option>
-      {options.map((option: OptionParams): ReactNode => {
+      {options.map((option: OptionParams): JSX.Element => {
         return (
           <option key={option.name} value={option.value}>
             {option.name}

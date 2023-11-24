@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 import { MyInputProps } from '@src/components/UI/MyInput/types';
 
-const MyInput = (props: MyInputProps): ReactNode => {
+const MyInput: FC<MyInputProps> = (props: MyInputProps): JSX.Element => {
   return <input {...props}></input>;
 };
 

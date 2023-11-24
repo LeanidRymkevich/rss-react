@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 
 import scss from '@src/components/UI/FallbackUI/FallbackUI.module.scss';
@@ -10,7 +10,7 @@ export const FALLBACK_MESSAGE =
   'Something goes wrong! To reload page press the button below.';
 export const BTN_TEXT = 'Reload';
 
-const FallbackUI = (): ReactNode => {
+const FallbackUI: FC<object> = (): JSX.Element => {
   const router: NextRouter = useRouter();
 
   const reload = (): void => {

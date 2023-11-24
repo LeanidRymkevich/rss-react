@@ -1,8 +1,6 @@
-import { ReactNode } from 'react';
-
 export interface MyButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
-  children: string | ReactNode;
+  children: string | JSX.Element;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }

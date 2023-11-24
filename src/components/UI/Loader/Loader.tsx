@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 
 import styles from '@src/styles/UI/Loader/Loader.module.scss';
 
-const Loader = (): ReactNode => {
+const Loader: FC<void> = (): JSX.Element => {
   return (
     <div data-testid="loader-wrapper" className={styles.loader_wrapper}>
       <div className={styles.loader}></div>
