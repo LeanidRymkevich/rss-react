@@ -1,10 +1,13 @@
-import NewComponent from '@src/components/NewComponent/NewComponent';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 const Main = (): ReactNode => {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) throw new Error();
+
   return (
     <>
-      <NewComponent></NewComponent>
+      <button onClick={() => setHasError(true)}>Click!</button>
     </>
   );
 };
