@@ -41,7 +41,12 @@ export const newsApi = createApi({
   }),
 });
 
-export const { useGetAllNewsQuery } = newsApi;
+export const {
+  useGetAllNewsQuery,
+  util: { getRunningQueriesThunk },
+} = newsApi;
+
+export const { getAllNews } = newsApi.endpoints;
 
 export const getArticleFromResponse = (
   id: number,

@@ -13,16 +13,11 @@ export const detailsSlice = createSlice({
     setDetails: (state, { payload }: PayloadAction<Article | null>) => {
       state.article = payload;
     },
-    setDetailsLoading(state, { payload }: PayloadAction<boolean>) {
-      state.isLoading = payload;
-    },
   },
 });
 
-export const { setDetails, setDetailsLoading } = detailsSlice.actions;
+export const { setDetails } = detailsSlice.actions;
 
 export const selectDetails = (state: RootState) => state.details.article;
-export const selectDetailsLoading = (state: RootState) =>
-  state.details.isLoading;
 
 export default detailsSlice.reducer;

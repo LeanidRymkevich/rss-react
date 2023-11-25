@@ -24,18 +24,13 @@ export const newsSlice = createSlice({
     setLimit(state, { payload }: PayloadAction<string>) {
       state.limit = payload;
     },
-    setNewIsLoading(state, { payload }: PayloadAction<boolean>) {
-      state.isLoading = payload;
-    },
   },
 });
 
-export const { setNews, setQuery, setPage, setLimit, setNewIsLoading } =
-  newsSlice.actions;
+export const { setNews, setQuery, setPage, setLimit } = newsSlice.actions;
 
 export const selectNews = (state: RootState) => state.news.articles;
 export const selectQuery = (state: RootState) => state.news.query;
 export const selectLimit = (state: RootState) => state.news.limit;
-export const selectNewIsLoading = (state: RootState) => state.news.isLoading;
 
 export default newsSlice.reducer;
