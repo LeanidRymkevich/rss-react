@@ -4,6 +4,7 @@ import {
   ErrorBoundaryProps,
   ErrorBoundaryState,
 } from '@src/components/ErrorBoundary/types';
+
 import FallbackUI from '@src/components/UI/FallbackUI/FallbackUI';
 
 export default class ErrorBoundary extends Component<

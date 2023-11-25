@@ -1,7 +1,8 @@
+import { FC } from 'react';
+
 import styles from '@src/pages/main/main.module.scss';
 
 import { SelectParams, OptionParams } from '@src/components/UI/Select/types';
-import { FC } from 'react';
 
 const Select: FC<SelectParams> = ({
   defaultOption,

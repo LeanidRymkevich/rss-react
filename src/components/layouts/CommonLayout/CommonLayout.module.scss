@@ -1,0 +1,39 @@
+@import '@src/styles/variables.scss';
+
+.root_wrapper {
+  margin: 0 auto;
+  max-width: 980px;
+  padding: 1rem;
+}
+
+.header {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid black;
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: $details-font-color;
+    font-size: 2rem;
+
+    &.active {
+      text-decoration: underline;
+    }
+  }
+}
+
+.title {
+  margin-right: auto;
+  font-size: 3rem;
+}
+
+.main {
+  width: 100%;
+}

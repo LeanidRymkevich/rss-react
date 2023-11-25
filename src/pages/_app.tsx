@@ -1,9 +1,9 @@
 import type { AppProps } from 'next/app';
+import { FC } from 'react';
 
 import '@src/styles/common.scss';
 
 import ErrorBoundary from '@src/components/ErrorBoundary/ErrorBoundary';
-import { FC } from 'react';
 
 const MyApp: FC<AppProps> = ({
   Component,
