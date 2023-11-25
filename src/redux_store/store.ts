@@ -2,14 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
 import newsReducer from 'src/redux_store/newsSlice/newsSlice';
-import detailsReducer from 'src/redux_store/detailsSlice/detailsSlice';
 import { newsApi } from '@src/redux_store/api/newsApi';
 import { REDUCERS_NAMES } from '@src/redux_store/types';
 
 const rootReducer = combineReducers({
   [REDUCERS_NAMES.NEWS]: newsReducer,
   [REDUCERS_NAMES.NEWS_API]: newsApi.reducer,
-  [REDUCERS_NAMES.DETAILS]: detailsReducer,
 });
 
 const makeStore = () =>

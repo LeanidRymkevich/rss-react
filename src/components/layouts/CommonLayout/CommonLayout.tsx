@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import { FC } from 'react';
 
 import styles from '@src/components/layouts/CommonLayout/CommonLayout.module.scss';
 
@@ -10,7 +11,7 @@ import { capitalizeFirstLetter } from '@src/utils/StringTransformations';
 
 const TITLE = 'New Searcher';
 
-const RouterLayout = ({
+const RouterLayout: FC<CommonLayoutProps> = ({
   pageName,
   children,
 }: CommonLayoutProps): JSX.Element => {

@@ -1,0 +1,26 @@
+@import '@src/styles/variables.scss';
+
+.newsItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  border: 2px solid $news-item-border-color;
+  padding: 0.5rem;
+}
+
+.newsItem__number {
+  text-align: center;
+  width: 7%;
+}
+
+.newsItem__content {
+  width: 92%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.newsItem__subtitle {
+  font-weight: 700;
+  font-style: italic;
+}
