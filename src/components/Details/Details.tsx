@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { NextRouter, useRouter } from 'next/router';
 import Image from 'next/image';
 
 import styles from '@src/pages/Details/styles.module.scss';
@@ -7,7 +6,6 @@ import searchBarStyles from '@src/components/SearchBar/SearchBar.module.scss';
 import newsItemStyles from '@src/components/NewsItem/NewsItems.module.scss';
 
 import { Article } from '@src/redux_store/api/types';
-import { INDEXES, Pages } from '@src/pages/types';
 
 import MyButton from '@src/components/UI/MyButton/MyButton';
 import Loader from '@src/components/UI/Loader/Loader';
@@ -32,20 +30,15 @@ import {
   getArticleFromResponse,
   useGetAllNewsQuery,
 } from '@src/redux_store/api/newsApi';
-import { useAppSelector } from '@src/hooks/ReduxHooks';
+import useRouterPath from '@src/hooks/useRouterPath';
+import { getPath } from '@src/utils/PathUtils';
 
 const Details: FC<object> = (): JSX.Element => {
-  const router: NextRouter = useRouter();
+  const { router, page, limit, query, id } = useRouterPath();
 
-  const pageNum: string = useAppSelector((state) => state.news.page);
-  const limit: string = useAppSelector((state) => state.news.limit);
-  const query: string = useAppSelector((state) => state.news.query);
-
-  const page: string = router.query[INDEXES.MAIN] as string;
-  const id: string = router.query[INDEXES.DETAILS] as string;
   const { data, isFetching, error } = useGetAllNewsQuery({
     limit,
-    page: page || pageNum,
+    page,
     query,
   });
 
@@ -55,7 +48,7 @@ const Details: FC<object> = (): JSX.Element => {
   const article: Article | null = getArticleFromResponse(articleID, data);
 
   const onBtnClick = (): void => {
-    router.push(`/${Pages.MAIN}/${page}`);
+    router.push(getPath({ page, limit, query, id }));
   };
 
   const onSectionClick = (e: React.MouseEvent<HTMLElement>): void => {

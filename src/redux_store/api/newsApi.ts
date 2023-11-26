@@ -8,7 +8,6 @@ import {
 } from '@src/redux_store/api/types';
 
 import * as constants from '@src/redux_store/api/constants';
-import { REDUCERS_NAMES } from '@src/redux_store/types';
 
 export function makeUrl(query: string, page: string, limit: string): string {
   const endpoint: string = query
@@ -24,7 +23,7 @@ export function makeUrl(query: string, page: string, limit: string): string {
 }
 
 export const newsApi = createApi({
-  reducerPath: REDUCERS_NAMES.NEWS_API,
+  reducerPath: 'newsApi',
   baseQuery: fetchBaseQuery({ baseUrl: constants.BASE_URL }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {

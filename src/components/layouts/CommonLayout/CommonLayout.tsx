@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 import styles from '@src/components/layouts/CommonLayout/CommonLayout.module.scss';
 
-import { DEFAULT_PATH, DEFAULT_TITLE_TAG_TEXT } from '@src/pages/types';
+import { DEFAULT_TITLE_TAG_TEXT } from '@src/pages/types';
 import { CommonLayoutProps } from '@src/components/layouts/CommonLayout/types';
 
 import { capitalizeFirstLetter } from '@src/utils/StringTransformations';
@@ -26,7 +26,7 @@ const RouterLayout: FC<CommonLayoutProps> = ({
         <header className={styles.header}>
           <nav className={styles.navigation}>
             <h1 className={styles.title}>{TITLE}</h1>
-            <Link href={DEFAULT_PATH}>Main</Link>
+            <Link href={'/main/1'}>Main</Link>
           </nav>
         </header>
 

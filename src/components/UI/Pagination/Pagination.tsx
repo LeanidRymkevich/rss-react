@@ -1,29 +1,27 @@
 import { FC, useMemo } from 'react';
 import Link from 'next/link';
-import { NextRouter, useRouter } from 'next/router';
 
 import styles from '@src/components/UI/Pagination/pagination.module.scss';
 
-import { INDEXES, Pages } from '@src/pages/types';
+import { PaginationProps } from '@src/components/UI/Pagination/types';
 
 import { calcPageAmount, createDigitsArray } from '@src/utils/NewsPageUtils';
-import { useAppSelector } from '@src/hooks/ReduxHooks';
+import useRouterPath from '@src/hooks/useRouterPath';
+import { getPath } from '@src/utils/PathUtils';
 
-const Pagination: FC<object> = (): JSX.Element => {
-  const router: NextRouter = useRouter();
+const Pagination: FC<PaginationProps> = ({
+  total,
+}: PaginationProps): JSX.Element => {
+  const { page, limit, id, query } = useRouterPath();
 
-  const total: number = useAppSelector((store) => store.news.total);
-  const limit: string = useAppSelector((store) => store.news.limit);
-
-  const pageAmount = calcPageAmount(total, +limit);
+  const pageAmount = calcPageAmount(total || 0, +limit || 0);
   const bullets: number[] = useMemo(
     (): number[] => createDigitsArray(pageAmount),
     [pageAmount]
   );
 
   const getClasses = (digit: number): string => {
-    const current: string = router.query[INDEXES.MAIN] as string;
-    return +current === digit
+    return +page === digit
       ? `${styles.bullet} ${styles.bullet_active}`
       : styles.bullet;
   };
@@ -33,7 +31,7 @@ const Pagination: FC<object> = (): JSX.Element => {
       {bullets.map((digit: number): JSX.Element => {
         return (
           <Link
-            href={`/${Pages.MAIN}/${digit}`}
+            href={getPath({ page: `${digit}`, limit, id, query })}
             key={digit}
             className={getClasses(digit)}
           >

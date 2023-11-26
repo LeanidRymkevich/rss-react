@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from '@src/components/NewsItem/NewsItems.module.scss';
 
 import { NewsItemProps } from '@src/components/NewsItem/types';
-import { INDEXES, Pages } from '@src/pages/types';
+import { Pages, QUERY_PARAMS } from '@src/pages/types';
 import { NextRouter, useRouter } from 'next/router';
 
 const LINK_TEXT = 'Learn more';
@@ -19,7 +19,7 @@ const NewsItem: FC<NewsItemProps> = ({
   author,
 }: NewsItemProps): JSX.Element => {
   const router: NextRouter = useRouter();
-  const page: string = router.query[INDEXES.MAIN] as string;
+  const page: string = router.query[QUERY_PARAMS.PAGE] as string;
 
   return (
     <li className={styles.newsItem}>

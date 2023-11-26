@@ -1,18 +1,13 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
-import newsReducer from 'src/redux_store/newsSlice/newsSlice';
 import { newsApi } from '@src/redux_store/api/newsApi';
-import { REDUCERS_NAMES } from '@src/redux_store/types';
-
-const rootReducer = combineReducers({
-  [REDUCERS_NAMES.NEWS]: newsReducer,
-  [REDUCERS_NAMES.NEWS_API]: newsApi.reducer,
-});
 
 const makeStore = () =>
   configureStore({
-    reducer: rootReducer,
+    reducer: {
+      newsApi: newsApi.reducer,
+    },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(newsApi.middleware),
   });

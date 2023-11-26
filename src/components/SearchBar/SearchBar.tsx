@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { NextRouter, useRouter } from 'next/router';
 
 import styles from '@src/components/SearchBar/SearchBar.module.scss';
 
@@ -13,24 +12,26 @@ import Search from '@src/components/UI/Search/Search';
 import MyButton from '@src/components/UI/MyButton/MyButton';
 import Select from '@src/components/UI/Select/Select';
 
-import { useAppDispatch, useAppSelector } from '@src/hooks/ReduxHooks';
-import { setLimit, setQuery } from 'src/redux_store/newsSlice/newsSlice';
-import { DEFAULT_PATH } from '@src/pages/types';
+import { getPath } from '@src/utils/PathUtils';
+import useRouterPath from '@src/hooks/useRouterPath';
+import { DEFAULT_QUERY_PARAMS } from '@src/redux_store/api/constants';
 
 const SearchBar: FC<object> = (): JSX.Element => {
-  const router: NextRouter = useRouter();
-
-  const dispatch = useAppDispatch();
-  const limit: string = useAppSelector((state) => state.news.limit);
-  const query: string = useAppSelector((state) => state.news.query);
+  const { router, limit, query, id } = useRouterPath();
 
   const [hasError, setError] = useState(false);
   const [searchValue, setSearchValue] = useState(query);
   const [perPage, setPerPage] = useState(limit);
 
   const onSearchBtnClick = async (): Promise<void> => {
-    dispatch(setQuery(searchValue));
-    router.push(DEFAULT_PATH);
+    router.push(
+      getPath({
+        page: DEFAULT_QUERY_PARAMS.page,
+        limit,
+        query: searchValue,
+        id,
+      })
+    );
   };
 
   const onSearchInputChange = (
@@ -48,8 +49,9 @@ const SearchBar: FC<object> = (): JSX.Element => {
   ): void => {
     const limit: string = event.target.value;
     setPerPage(limit);
-    dispatch(setLimit(limit));
-    router.push(DEFAULT_PATH);
+    router.push(
+      getPath({ page: DEFAULT_QUERY_PARAMS.page, limit: limit, query, id })
+    );
   };
 
   if (hasError) throw new Error();

@@ -1,15 +1,13 @@
-import { DEFAULT_QUERY_PARAMS } from '@src/redux_store/api/constants';
-
 export enum Pages {
   MAIN = 'main',
   DETAILS = 'details',
 }
 
-export enum INDEXES {
-  MAIN = 'page',
-  DETAILS = 'id',
+export enum QUERY_PARAMS {
+  PAGE = 'page',
+  ID = 'id',
+  LIMIT = 'limit',
+  QUERY = 'query',
 }
 
 export const DEFAULT_TITLE_TAG_TEXT = 'RSS-React';
-
-export const DEFAULT_PATH = `/${Pages.MAIN}/${DEFAULT_QUERY_PARAMS.page}`;
