@@ -8,6 +8,7 @@ import { DEFAULT_TITLE_TAG_TEXT } from '@src/pages/types';
 import { CommonLayoutProps } from '@src/components/layouts/CommonLayout/types';
 
 import { capitalizeFirstLetter } from '@src/utils/StringTransformations';
+import { getPath } from '@src/utils/PathUtils';
 
 const TITLE = 'New Searcher';
 
@@ -26,7 +27,7 @@ const RouterLayout: FC<CommonLayoutProps> = ({
         <header className={styles.header}>
           <nav className={styles.navigation}>
             <h1 className={styles.title}>{TITLE}</h1>
-            <Link href={'/main/1'}>Main</Link>
+            <Link href={getPath()}>Main</Link>
           </nav>
         </header>
 

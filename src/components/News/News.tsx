@@ -16,13 +16,18 @@ import useRouterPath from '@src/hooks/useRouterPath';
 const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
 const News: FC<object> = (): JSX.Element => {
-  const { page, limit, query } = useRouterPath();
+  const { router, page, limit, query } = useRouterPath();
 
-  const { data, isFetching, error } = useGetAllNewsQuery({
-    limit,
-    page,
-    query,
-  });
+  const { data, isFetching, error } = useGetAllNewsQuery(
+    {
+      limit,
+      page,
+      query,
+    },
+    {
+      skip: router.isFallback,
+    }
+  );
 
   if (error) throw error;
 
@@ -36,8 +41,12 @@ const News: FC<object> = (): JSX.Element => {
     <div className={styles.news}>
       <SearchBar />
       <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
-      {isFetching ? <Loader /> : <NewsList items={itemsProps} />}
-      <Pagination total={data?.totalResults} limit={+limit} />
+      {isFetching || router.isFallback ? (
+        <Loader />
+      ) : (
+        <NewsList items={itemsProps} />
+      )}
+      <Pagination total={data?.totalResults} />
     </div>
   );
 };

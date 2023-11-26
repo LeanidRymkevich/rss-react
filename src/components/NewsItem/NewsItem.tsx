@@ -4,8 +4,8 @@ import Link from 'next/link';
 import styles from '@src/components/NewsItem/NewsItems.module.scss';
 
 import { NewsItemProps } from '@src/components/NewsItem/types';
-import { Pages, QUERY_PARAMS } from '@src/pages/types';
-import { NextRouter, useRouter } from 'next/router';
+import useRouterPath from '@src/hooks/useRouterPath';
+import { getPath } from '@src/utils/PathUtils';
 
 const LINK_TEXT = 'Learn more';
 const DESCRIPTION_SUBTITLE = 'Description: ';
@@ -18,8 +18,7 @@ const NewsItem: FC<NewsItemProps> = ({
   publisher,
   author,
 }: NewsItemProps): JSX.Element => {
-  const router: NextRouter = useRouter();
-  const page: string = router.query[QUERY_PARAMS.PAGE] as string;
+  const { page, limit, query } = useRouterPath();
 
   return (
     <li className={styles.newsItem}>
@@ -41,7 +40,7 @@ const NewsItem: FC<NewsItemProps> = ({
           <span className={styles.newsItem__subtitle}>{AUTHOR_SUBTITLE}</span>
           <span>{author}</span>
         </p>
-        <Link href={`/${Pages.MAIN}/${page}/${Pages.DETAILS}/${itemNum}`}>
+        <Link href={getPath({ page, limit, query, id: itemNum })}>
           {LINK_TEXT}
         </Link>
       </div>

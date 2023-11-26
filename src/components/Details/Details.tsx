@@ -36,11 +36,17 @@ import { getPath } from '@src/utils/PathUtils';
 const Details: FC<object> = (): JSX.Element => {
   const { router, page, limit, query, id } = useRouterPath();
 
-  const { data, isFetching, error } = useGetAllNewsQuery({
-    limit,
-    page,
-    query,
-  });
+  const { data, isFetching, error } = useGetAllNewsQuery(
+    {
+      limit,
+      page,
+      query,
+    },
+
+    {
+      skip: router.isFallback,
+    }
+  );
 
   if (error) throw error;
 
@@ -57,7 +63,7 @@ const Details: FC<object> = (): JSX.Element => {
 
   return (
     <section className={styles.details} onClick={onSectionClick}>
-      {isFetching ? (
+      {isFetching || router.isFallback ? (
         <Loader />
       ) : article ? (
         <>
