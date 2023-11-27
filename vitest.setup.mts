@@ -19,13 +19,13 @@ import { APIResponse } from './src/redux_store/api/types';
 
 export const handlers = [
   http.get(
-    `${BASE_URL}/${EVERYTHING_ENDPOINT}`,
+    `${BASE_URL}${EVERYTHING_ENDPOINT}`,
     async (): Promise<StrictResponse<APIResponse>> => {
       return HttpResponse.json(MOCK_RESPONSE);
     }
   ),
   http.get(
-    `${BASE_URL}/${TOP_HEADLINES_ENDPOINT}`,
+    `${BASE_URL}${TOP_HEADLINES_ENDPOINT}`,
     async (): Promise<StrictResponse<APIResponse>> => {
       return HttpResponse.json(MOCK_RESPONSE);
     }
