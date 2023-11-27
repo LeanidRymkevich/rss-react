@@ -6,6 +6,7 @@ import {
   mockOutput_1,
   mockOutput_2,
 } from '@src/__tests__/__mocks__/NewsPageUtils';
+
 import {
   getNewsItemProps,
   calcPageAmount,
