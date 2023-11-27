@@ -3,7 +3,7 @@ import { createWrapper } from 'next-redux-wrapper';
 
 import { newsApi } from '@src/redux_store/api/newsApi';
 
-const makeStore = () =>
+export const makeStore = () =>
   configureStore({
     reducer: {
       newsApi: newsApi.reducer,

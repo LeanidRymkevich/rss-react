@@ -6,7 +6,7 @@ import {
   ERROR_BTN_TEXT,
   SEARCH_PLACEHOLDER,
   SELECT_PARAMS,
-} from 'src/components/SearchBar/constants';
+} from '@src/components/SearchBar/constants';
 
 import Search from '@src/components/UI/Search/Search';
 import MyButton from '@src/components/UI/MyButton/MyButton';
@@ -15,6 +15,8 @@ import Select from '@src/components/UI/Select/Select';
 import { getPath } from '@src/utils/PathUtils';
 import useRouterPath from '@src/hooks/useRouterPath';
 import { DEFAULT_QUERY_PARAMS } from '@src/redux_store/api/constants';
+
+import { SEARCH_BAR_TEST_ID } from '@src/__tests__/__mocks__/TEST_IDs';
 
 const SearchBar: FC<object> = (): JSX.Element => {
   const { router, limit, query, id } = useRouterPath();
@@ -57,7 +59,7 @@ const SearchBar: FC<object> = (): JSX.Element => {
   if (hasError) throw new Error();
 
   return (
-    <section className={styles.search_wrapper}>
+    <section data-testid={SEARCH_BAR_TEST_ID} className={styles.search_wrapper}>
       <Search
         wrapperClass={styles.search}
         inputProps={{

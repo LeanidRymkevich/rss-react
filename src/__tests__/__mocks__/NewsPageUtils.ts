@@ -1,7 +1,6 @@
-import { NewsItemProps } from 'src/components/NewsItem/types';
-import { NewsState } from 'src/redux_store/newsSlice/types';
+import { NewsItemProps } from '@src/components/NewsItem/types';
 
-export const mockInput_1: Omit<NewsState, 'status' | 'isLoading'> = {
+export const mockInput_1 = {
   query: '',
   total: 2,
   page: '1',
@@ -57,7 +56,7 @@ export const mockOutput_1: NewsItemProps[] = [
   },
 ];
 
-export const mockInput_2: Omit<NewsState, 'status' | 'isLoading'> = {
+export const mockInput_2 = {
   query: '',
   total: 2,
   page: '1',

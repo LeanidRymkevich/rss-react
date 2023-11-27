@@ -9,6 +9,11 @@ import { calcPageAmount, createDigitsArray } from '@src/utils/NewsPageUtils';
 import useRouterPath from '@src/hooks/useRouterPath';
 import { getPath } from '@src/utils/PathUtils';
 
+import {
+  PAGINATION_TEST_ID,
+  BULLET_TEST_ID,
+} from '@src/__tests__/__mocks__/TEST_IDs';
+
 const Pagination: FC<PaginationProps> = ({
   total,
 }: PaginationProps): JSX.Element => {
@@ -27,10 +32,11 @@ const Pagination: FC<PaginationProps> = ({
   };
 
   return (
-    <div className={styles.pagination}>
+    <div data-testid={PAGINATION_TEST_ID} className={styles.pagination}>
       {bullets.map((digit: number): JSX.Element => {
         return (
           <Link
+            data-testid={BULLET_TEST_ID}
             href={getPath({ page: `${digit}`, limit, id, query })}
             key={digit}
             className={getClasses(digit)}

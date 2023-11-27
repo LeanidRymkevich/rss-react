@@ -7,6 +7,8 @@ import { NewsItemProps } from '@src/components/NewsItem/types';
 import useRouterPath from '@src/hooks/useRouterPath';
 import { getPath } from '@src/utils/PathUtils';
 
+import { ITEM_TEST_ID } from '@src/__tests__/__mocks__/TEST_IDs';
+
 const LINK_TEXT = 'Learn more';
 const DESCRIPTION_SUBTITLE = 'Description: ';
 const PUBLISHER_SUBTITLE = 'Publisher: ';
@@ -21,7 +23,7 @@ const NewsItem: FC<NewsItemProps> = ({
   const { page, limit, query } = useRouterPath();
 
   return (
-    <li className={styles.newsItem}>
+    <li data-testid={ITEM_TEST_ID} className={styles.newsItem}>
       <div className={styles.newsItem__number}>{itemNum}</div>
       <div className={styles.newsItem__content}>
         <p>
