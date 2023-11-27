@@ -14,7 +14,7 @@ import { ParsedUrlQuery } from 'querystring';
 import News from '@src/components/News/News';
 import useContextPath from '@src/hooks/useContextPath';
 
-const Main: FC<object> = (): JSX.Element => {
+const MainPage: FC<object> = (): JSX.Element => {
   return (
     <CommonLayout pageName={Pages.MAIN}>
       <News />
@@ -41,4 +41,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
 );
 
-export default Main;
+export default MainPage;

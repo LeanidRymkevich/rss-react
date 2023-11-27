@@ -13,6 +13,8 @@ import { getNewsItemProps } from '@src/utils/NewsPageUtils';
 import { useGetAllNewsQuery } from '@src/redux_store/api/newsApi';
 import useRouterPath from '@src/hooks/useRouterPath';
 
+import { NEWS_TEST_ID } from '@src/__tests__/__mocks__/TEST_IDs';
+
 const SEARCH_RESULT_TITLE_TEXT = 'Search results';
 
 const News: FC<object> = (): JSX.Element => {
@@ -38,7 +40,7 @@ const News: FC<object> = (): JSX.Element => {
   );
 
   return (
-    <div className={styles.news}>
+    <div data-testid={NEWS_TEST_ID} className={styles.news}>
       <SearchBar />
       <h2 className={styles.search_result_title}>{SEARCH_RESULT_TITLE_TEXT}</h2>
       {isFetching || router.isFallback ? (

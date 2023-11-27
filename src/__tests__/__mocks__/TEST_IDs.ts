@@ -10,6 +10,12 @@ const ITEM_TEST_ID = 'list-item';
 const NO_RESULTS_TEST_ID = 'no-results';
 const PAGINATION_TEST_ID = 'pagination';
 const BULLET_TEST_ID = 'bullet';
+const NOT_FOUND_PAGE_ID = 'not_found';
+const NEWS_TEST_ID = 'news';
+const DETAILS_TEST_ID = 'details';
+const NAV_BAR_TEST_ID = 'navigation';
+const HEADER_TEST_ID = 'header';
+const MAIN_SECTION_TEST_ID = 'main_section';
 
 export {
   LOADER_TEST_ID,
@@ -24,4 +30,10 @@ export {
   NO_RESULTS_TEST_ID,
   PAGINATION_TEST_ID,
   BULLET_TEST_ID,
+  NOT_FOUND_PAGE_ID,
+  NEWS_TEST_ID,
+  DETAILS_TEST_ID,
+  NAV_BAR_TEST_ID,
+  HEADER_TEST_ID,
+  MAIN_SECTION_TEST_ID,
 };

@@ -10,6 +10,12 @@ import { CommonLayoutProps } from '@src/components/layouts/CommonLayout/types';
 import { capitalizeFirstLetter } from '@src/utils/StringTransformations';
 import { getPath } from '@src/utils/PathUtils';
 
+import {
+  NAV_BAR_TEST_ID,
+  HEADER_TEST_ID,
+  MAIN_SECTION_TEST_ID,
+} from '@src/__tests__/__mocks__/TEST_IDs';
+
 const TITLE = 'New Searcher';
 
 const RouterLayout: FC<CommonLayoutProps> = ({
@@ -24,14 +30,16 @@ const RouterLayout: FC<CommonLayoutProps> = ({
         </title>
       </Head>
       <div className={styles.root_wrapper}>
-        <header className={styles.header}>
-          <nav className={styles.navigation}>
+        <header data-testid={HEADER_TEST_ID} className={styles.header}>
+          <nav data-testid={NAV_BAR_TEST_ID} className={styles.navigation}>
             <h1 className={styles.title}>{TITLE}</h1>
             <Link href={getPath()}>Main</Link>
           </nav>
         </header>
 
-        <main className={styles.main}>{children}</main>
+        <main data-testid={MAIN_SECTION_TEST_ID} className={styles.main}>
+          {children}
+        </main>
       </div>
     </>
   );

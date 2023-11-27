@@ -17,8 +17,9 @@ import { ParsedUrlQuery } from 'querystring';
 import useContextPath from '@src/hooks/useContextPath';
 import useRouterPath from '@src/hooks/useRouterPath';
 import { getPath } from '@src/utils/PathUtils';
+import Details from '@src/components/Details/Details';
 
-const Details: FC<object> = (): JSX.Element => {
+const DetailsPage: FC<object> = (): JSX.Element => {
   const { router, page, limit, query, id } = useRouterPath();
 
   const onMainPageClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -60,4 +61,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
 );
 
-export default Details;
+export default DetailsPage;

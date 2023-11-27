@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import styles from '@src/pages/Details/styles.module.scss';
+import styles from '@src/components/Details/styles.module.scss';
 import searchBarStyles from '@src/components/SearchBar/SearchBar.module.scss';
 import newsItemStyles from '@src/components/NewsItem/NewsItems.module.scss';
 
@@ -33,6 +33,8 @@ import {
 import useRouterPath from '@src/hooks/useRouterPath';
 import { getPath } from '@src/utils/PathUtils';
 
+import { DETAILS_TEST_ID } from '@src/__tests__/__mocks__/TEST_IDs';
+
 const Details: FC<object> = (): JSX.Element => {
   const { router, page, limit, query, id } = useRouterPath();
 
@@ -62,7 +64,11 @@ const Details: FC<object> = (): JSX.Element => {
   };
 
   return (
-    <section className={styles.details} onClick={onSectionClick}>
+    <section
+      data-testid={DETAILS_TEST_ID}
+      className={styles.details}
+      onClick={onSectionClick}
+    >
       {isFetching || router.isFallback ? (
         <Loader />
       ) : article ? (
