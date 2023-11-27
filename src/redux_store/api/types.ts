@@ -15,7 +15,7 @@ export interface Article {
   url: string;
   urlToImage: string | null;
   publishedAt: string;
-  content: string;
+  content: string | null;
 }
 
 export interface APIQueryParams {

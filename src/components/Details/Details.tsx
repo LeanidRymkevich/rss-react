@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import { FC } from 'react';
-import Image from 'next/image';
 
 import styles from '@src/components/Details/styles.module.scss';
 import searchBarStyles from '@src/components/SearchBar/SearchBar.module.scss';
@@ -56,7 +56,7 @@ const Details: FC<object> = (): JSX.Element => {
   const article: Article | null = getArticleFromResponse(articleID, data);
 
   const onBtnClick = (): void => {
-    router.push(getPath({ page, limit, query, id }));
+    router.push(getPath({ page, limit, query, id: undefined }));
   };
 
   const onSectionClick = (e: React.MouseEvent<HTMLElement>): void => {
@@ -73,9 +73,9 @@ const Details: FC<object> = (): JSX.Element => {
         <Loader />
       ) : article ? (
         <>
-          <Image
+          <img
             className={styles.img}
-            src={article.urlToImage || newsImgSRC}
+            src={article.urlToImage || newsImgSRC.src}
             alt={IMG_ALT_TEXT}
           />
           <h3>{article.title}</h3>
@@ -96,10 +96,12 @@ const Details: FC<object> = (): JSX.Element => {
               {CONTENT_SUBTITLE}
             </span>
             <span>
-              {article.content.slice(
-                0,
-                article.content.indexOf(SEARCHED_IN_CONTENT_CHAR)
-              )}
+              {article.content
+                ? article.content.slice(
+                    0,
+                    article.content.indexOf(SEARCHED_IN_CONTENT_CHAR)
+                  )
+                : 'none'}
             </span>
           </p>
           <a href={article.url} target={LINK_TARGET}>
