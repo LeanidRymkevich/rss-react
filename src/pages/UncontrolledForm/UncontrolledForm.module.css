@@ -29,6 +29,10 @@
   font-size: 1.6rem;
 }
 
+.countries_wrapper {
+  width: 73%;
+}
+
 .gender_wrapper {
   position: relative;
   display: flex;

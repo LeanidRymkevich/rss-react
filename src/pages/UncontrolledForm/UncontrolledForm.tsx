@@ -14,6 +14,7 @@ import {
   BTN_TYPE,
   GENDER_FIELD_TEXT,
 } from '@src/pages/UncontrolledForm/constants';
+import Countries from '@src/components/Countries/Countries';
 
 const UncontrolledForm: FC = (): JSX.Element => {
   const form = useRef<HTMLFormElement>(null);
@@ -22,7 +23,11 @@ const UncontrolledForm: FC = (): JSX.Element => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     event.preventDefault();
-    console.log(form.current?.value);
+    if (form.current) {
+      for (const pair of new FormData(form.current).entries()) {
+        console.log(pair[0], pair[1]);
+      }
+    }
   };
 
   return (
@@ -96,8 +101,8 @@ const UncontrolledForm: FC = (): JSX.Element => {
           <label htmlFor={FORM_FILEDs_NAMES.COUNTRY}>
             {capitalize(FORM_FILEDs_NAMES.COUNTRY)}
           </label>
-          <input
-            type={INPUT_TYPES.TEXT}
+          <Countries
+            className={styles.countries_wrapper}
             id={FORM_FILEDs_NAMES.COUNTRY}
             name={FORM_FILEDs_NAMES.COUNTRY}
           />
