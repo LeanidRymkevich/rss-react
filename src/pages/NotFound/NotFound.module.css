@@ -1,0 +1,14 @@
+.not_found {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.link {
+  font-size: 1.8rem;
+}

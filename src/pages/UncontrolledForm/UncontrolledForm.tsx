@@ -1,14 +1,19 @@
 import { FC, useRef } from 'react';
 
-import styles from './UncontrolledForm.module.css'; // @src/pages/UncontrolledForm/UncontrolledForm.module.css';
+import styles from '@src/pages/UncontrolledForm/UncontrolledForm.module.css';
 
 import {
   FORM_FILEDs_NAMES,
   INPUT_TYPES,
 } from '@src/pages/UncontrolledForm/types';
-import { BTN_TYPE, GENDER_FIELD_TEXT } from './constants';
-import { capitalize } from '@src/utils/StringTransform';
 import { Pages } from '@src/Router/types';
+
+import { capitalize } from '@src/utils/StringTransform';
+
+import {
+  BTN_TYPE,
+  GENDER_FIELD_TEXT,
+} from '@src/pages/UncontrolledForm/constants';
 
 const UncontrolledForm: FC = (): JSX.Element => {
   const form = useRef<HTMLFormElement>(null);
