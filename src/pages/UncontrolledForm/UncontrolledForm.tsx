@@ -1,10 +1,12 @@
 import { FC, useRef } from 'react';
 
+import styles from './UncontrolledForm.module.css'; // @src/pages/UncontrolledForm/UncontrolledForm.module.css';
+
 import {
   FORM_FILEDs_NAMES,
   INPUT_TYPES,
 } from '@src/pages/UncontrolledForm/types';
-import { BTN_TYPE } from './constants';
+import { BTN_TYPE, GENDER_FIELD_TEXT } from './constants';
 import { capitalize } from '@src/utils/StringTransform';
 import { Pages } from '@src/Router/types';
 
@@ -20,9 +22,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
 
   return (
     <div>
-      <h2>{`${Pages.UNCONTROLLED_FORM} Page`}</h2>
-      <form ref={form}>
-        <div>
+      <h2 className={styles.title}>{`${Pages.UNCONTROLLED_FORM} Page`}</h2>
+      <form className={styles.form} ref={form}>
+        <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.NAME}>
             {capitalize(FORM_FILEDs_NAMES.NAME)}
           </label>
@@ -31,9 +33,10 @@ const UncontrolledForm: FC = (): JSX.Element => {
             id={FORM_FILEDs_NAMES.NAME}
             name={FORM_FILEDs_NAMES.NAME}
           />
+          <p className={styles.error}></p>
         </div>
 
-        <div>
+        <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.AGE}>
             {capitalize(FORM_FILEDs_NAMES.AGE)}
           </label>
@@ -42,10 +45,12 @@ const UncontrolledForm: FC = (): JSX.Element => {
             id={FORM_FILEDs_NAMES.AGE}
             name={FORM_FILEDs_NAMES.AGE}
           />
+          <p className={styles.error}></p>
         </div>
 
-        <div>
-          <div>
+        <div className={styles.gender_wrapper}>
+          <p className={styles.gender_text}>{GENDER_FIELD_TEXT}</p>
+          <div className={styles.gender}>
             <label htmlFor={FORM_FILEDs_NAMES.GENDER_MALE}>
               {capitalize(FORM_FILEDs_NAMES.GENDER_MALE)}
             </label>
@@ -56,7 +61,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
               value={FORM_FILEDs_NAMES.GENDER_MALE}
             />
           </div>
-          <div>
+          <div className={styles.gender}>
             <label htmlFor={FORM_FILEDs_NAMES.GENDER_FEMALE}>
               {capitalize(FORM_FILEDs_NAMES.GENDER_FEMALE)}
             </label>
@@ -67,9 +72,10 @@ const UncontrolledForm: FC = (): JSX.Element => {
               value={FORM_FILEDs_NAMES.GENDER_FEMALE}
             />
           </div>
+          <p className={styles.error}></p>
         </div>
 
-        <div>
+        <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.EMAIL}>
             {capitalize(FORM_FILEDs_NAMES.EMAIL)}
           </label>
@@ -78,9 +84,10 @@ const UncontrolledForm: FC = (): JSX.Element => {
             id={FORM_FILEDs_NAMES.EMAIL}
             name={FORM_FILEDs_NAMES.EMAIL}
           />
+          <p className={styles.error}></p>
         </div>
 
-        <div>
+        <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.COUNTRY}>
             {capitalize(FORM_FILEDs_NAMES.COUNTRY)}
           </label>
@@ -88,10 +95,11 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.TEXT}
             id={FORM_FILEDs_NAMES.COUNTRY}
             name={FORM_FILEDs_NAMES.COUNTRY}
-          ></input>
+          />
+          <p className={styles.error}></p>
         </div>
 
-        <div>
+        <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.IMAGE}>
             {capitalize(FORM_FILEDs_NAMES.IMAGE)}
           </label>
@@ -99,10 +107,11 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.FILE}
             id={FORM_FILEDs_NAMES.IMAGE}
             name={FORM_FILEDs_NAMES.IMAGE}
-          ></input>
+          />
+          <p className={styles.error}></p>
         </div>
 
-        <div>
+        <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.PASSWORD}>
             {capitalize(FORM_FILEDs_NAMES.PASSWORD)}
           </label>
@@ -111,9 +120,10 @@ const UncontrolledForm: FC = (): JSX.Element => {
             id={FORM_FILEDs_NAMES.PASSWORD}
             name={FORM_FILEDs_NAMES.PASSWORD}
           />
+          <p className={styles.error}></p>
         </div>
 
-        <div>
+        <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.REPEAT_PASSWORD}>
             {capitalize(FORM_FILEDs_NAMES.REPEAT_PASSWORD)}
           </label>
@@ -122,9 +132,10 @@ const UncontrolledForm: FC = (): JSX.Element => {
             id={FORM_FILEDs_NAMES.REPEAT_PASSWORD}
             name={FORM_FILEDs_NAMES.REPEAT_PASSWORD}
           />
+          <p className={styles.error}></p>
         </div>
 
-        <div>
+        <div className={styles.accept}>
           <label htmlFor={FORM_FILEDs_NAMES.ACCEPT_TnC}>
             {capitalize(FORM_FILEDs_NAMES.ACCEPT_TnC)}
           </label>
@@ -133,6 +144,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
             id={FORM_FILEDs_NAMES.ACCEPT_TnC}
             name={FORM_FILEDs_NAMES.ACCEPT_TnC}
           />
+          <p className={styles.error}></p>
         </div>
 
         <button type={BTN_TYPE} onClick={btnOnClick}>
