@@ -4,6 +4,7 @@ export enum FORM_FILEDs_NAMES {
   EMAIL = 'email',
   PASSWORD = 'password',
   REPEAT_PASSWORD = 'repeat password',
+  GENDER = 'gender',
   GENDER_MALE = 'male',
   GENDER_FEMALE = 'female',
   ACCEPT_TnC = 'acceptTnC',
@@ -20,3 +21,7 @@ export enum INPUT_TYPES {
   RADIO = 'radio',
   FILE = 'file',
 }
+
+export type Gender =
+  | FORM_FILEDs_NAMES.GENDER_MALE
+  | FORM_FILEDs_NAMES.GENDER_FEMALE;

@@ -67,7 +67,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
             <input
               type={INPUT_TYPES.RADIO}
               id={FORM_FILEDs_NAMES.GENDER_MALE}
-              name={FORM_FILEDs_NAMES.GENDER_MALE}
+              name={FORM_FILEDs_NAMES.GENDER}
               value={FORM_FILEDs_NAMES.GENDER_MALE}
             />
           </div>
@@ -78,7 +78,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
             <input
               type={INPUT_TYPES.RADIO}
               id={FORM_FILEDs_NAMES.GENDER_FEMALE}
-              name={FORM_FILEDs_NAMES.GENDER_FEMALE}
+              name={FORM_FILEDs_NAMES.GENDER}
               value={FORM_FILEDs_NAMES.GENDER_FEMALE}
             />
           </div>
