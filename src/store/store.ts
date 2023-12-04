@@ -3,9 +3,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { REDUCERS } from '@src/store/types';
 
 import CountrySlice from '@src/store/CountriesSlice/CountriesSlice';
+import FormDataSlice from '@src/store/FormDataSlice/FormDataSlice';
 
 const rootReducer = combineReducers({
   [REDUCERS.COUNTRIES]: CountrySlice,
+  [REDUCERS.FORM_DATA]: FormDataSlice,
 });
 
 export function setupStore() {
