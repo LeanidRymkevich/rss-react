@@ -58,12 +58,14 @@ const schema = yup.object().shape({
     .mixed()
     .required(REQUIRED_MESSAGE)
     .test(IMG_SIZE_TEST_NAME, INVALID_IMG_SIZE_MESSAGE, (image): boolean => {
+      if (image instanceof FileList) image = image[0];
       if (image instanceof File) {
         return image.size <= ALLOWED_IMAGE_SIZE;
       }
       return false;
     })
     .test(IMG_TYPES_TEST_NAME, INVALID_IMG_TYPE_MESSAGE, (image): boolean => {
+      if (image instanceof FileList) image = image[0];
       if (image instanceof File) {
         return ALLOWED_IMG_TYPES.indexOf(image.type) !== -1;
       }
