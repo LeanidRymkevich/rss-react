@@ -1,4 +1,4 @@
-const NAME_RE: RegExp = /[A-Z].*/;
+const NAME_RE: RegExp = /^[A-Z].*/;
 const PW_LOWERCASE_LETTER_RE = /.*[a-z]+.*/;
 const PW_UPPERCASE_LETTER_RE = /.*[A-Z]+.*/;
 const PW_NUMBER_RE = /.*[0-9]+.*/;

@@ -12,7 +12,7 @@ import { Pages, Paths } from '@src/Router/types';
 
 import schema, { CustomFormData } from '@src/Validation/Validation';
 import { capitalize } from '@src/utils/StringTransform';
-import PasswordStrength from '@src/components/PasswordStrength';
+import PasswordStrength from '@src/components/PasswordStrength/PasswordStrength';
 import {
   FormsErrorMessages,
   getFormDataItem,
@@ -20,14 +20,14 @@ import {
   getFormInputsValues,
   initialErrors,
 } from '@src/utils/UncontrolledFormUtils';
+import { useAppDispatch } from '@src/hooks/reduxHooks';
+import { addItem } from '@src/store/FormDataSlice/FormDataSlice';
 
 import {
   BTN_TYPE,
   GENDER_FIELD_TEXT,
 } from '@src/pages/UncontrolledForm/constants';
 import Countries from '@src/components/Countries/Countries';
-import { useAppDispatch } from '@src/hooks/reduxHooks';
-import { addItem } from '@src/store/FormDataSlice/FormDataSlice';
 
 const UncontrolledForm: FC = (): JSX.Element => {
   const navigate: NavigateFunction = useNavigate();
@@ -68,13 +68,17 @@ const UncontrolledForm: FC = (): JSX.Element => {
         }),
         { abortEarly: false }
       )) as CustomFormData;
+
       setPwStrength(undefined);
       setErrors(initialErrors);
+
       navigate(Paths[Pages.MAIN]);
-      dispatch(addItem(await getFormDataItem(data, 'Uncontrolled Form')));
+
+      dispatch(addItem(await getFormDataItem(data, Pages.UNCONTROLLED_FORM)));
     } catch (error) {
       if (!(error instanceof ValidationError)) return;
       const errorsObj: FormsErrorMessages = getFormErrorMessages(error);
+      console.log(error.inner);
       setPwStrength(undefined);
       setErrors(errorsObj);
     }
@@ -82,6 +86,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
 
   const onChangePw = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const element: React.ReactNode = PasswordStrength(event.target.value);
+
     setPwStrength(element);
     setErrors({ ...errors, password: [] });
   };
@@ -201,7 +206,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
 
         <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.REPEAT_PASSWORD}>
-            {capitalize(FORM_FILEDs_NAMES.REPEAT_PASSWORD)}
+            {capitalize(FORM_FILEDs_NAMES.REPEAT_PASSWORD).replace('_', ' ')}
           </label>
           <input
             type={INPUT_TYPES.PASSWORD}

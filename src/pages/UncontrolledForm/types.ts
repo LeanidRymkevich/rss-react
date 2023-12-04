@@ -3,7 +3,7 @@ export enum FORM_FILEDs_NAMES {
   AGE = 'age',
   EMAIL = 'email',
   PASSWORD = 'password',
-  REPEAT_PASSWORD = 'repeat password',
+  REPEAT_PASSWORD = 'repeat_password',
   GENDER = 'gender',
   GENDER_MALE = 'male',
   GENDER_FEMALE = 'female',

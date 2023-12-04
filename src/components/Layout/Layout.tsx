@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
-import styles from './Layout.module.css';
+import styles from '@src/components/Layout/Layout.module.css';
 
 import { Pages, Paths } from '@src/Router/types';
 

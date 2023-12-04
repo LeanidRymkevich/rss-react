@@ -34,7 +34,17 @@ const schema = yup.object().shape({
     .string()
     .required(REQUIRED_MESSAGE)
     .matches(NAME_RE, FIRST_UPPERCASE_LETTER_MASSAGE),
-  age: yup.number().required(REQUIRED_MESSAGE).positive(POSITIVE_AGE_MESSAGE),
+  age: yup
+    .mixed()
+    .test('Nan test', REQUIRED_MESSAGE, (value): boolean => {
+      if (!value || isNaN(+value)) return false;
+      return true;
+    })
+    .required(REQUIRED_MESSAGE)
+    .test('Positive test', POSITIVE_AGE_MESSAGE, (value): boolean => {
+      if (+value <= 0) return false;
+      return true;
+    }),
   gender: yup
     .string()
     .required(REQUIRED_MESSAGE)

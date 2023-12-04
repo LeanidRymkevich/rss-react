@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import styles from '@src/pages/UncontrolledForm/UncontrolledForm.module.css';
+import styles from '@src/components/PasswordStrength/styles.module.css';
 
 const WEAK_PW_LENGTH = 5;
 const MIDDLE_PW_LENGTH = 8;
@@ -24,7 +24,7 @@ const PasswordStrength: FC<string> = (value: string): JSX.Element | null => {
 
   return (
     <p
-      className={styles.error}
+      className={styles.strength}
       style={{
         color,
       }}
