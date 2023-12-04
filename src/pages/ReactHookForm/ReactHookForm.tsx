@@ -33,7 +33,7 @@ const ReactHookForm: FC = (): JSX.Element => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-
+  console.log(errors.country?.ref?.value);
   const navigate: NavigateFunction = useNavigate();
 
   const dispatch = useAppDispatch();
