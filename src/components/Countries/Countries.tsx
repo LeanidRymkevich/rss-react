@@ -49,6 +49,7 @@ const Countries: FC<CountriesProps> = (props: CountriesProps): JSX.Element => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
+        ref={props.reference}
       />
       {!hidden && (
         <Dropdown items={filteredCountries} onClick={onDropdownClick} />

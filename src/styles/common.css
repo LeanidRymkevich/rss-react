@@ -60,6 +60,14 @@ button:active {
   color: var(--button-bg);
 }
 
+button:disabled:hover,
+button:disabled:active {
+  cursor: not-allowed;
+  background-color: var(--button-bg);
+  border: 1px solid transparent;
+  color: inherit;
+}
+
 #root {
   width: 100%;
 }

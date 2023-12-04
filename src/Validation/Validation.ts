@@ -1,5 +1,4 @@
 import * as yup from 'yup';
-import { File } from 'buffer';
 
 import { FORM_FILEDs_NAMES, Gender } from '@src/pages/UncontrolledForm/types';
 
@@ -35,11 +34,11 @@ const schema = yup.object().shape({
     .string()
     .required(REQUIRED_MESSAGE)
     .matches(NAME_RE, FIRST_UPPERCASE_LETTER_MASSAGE),
-  age: yup.number().positive(POSITIVE_AGE_MESSAGE).required(REQUIRED_MESSAGE),
+  age: yup.number().required(REQUIRED_MESSAGE).positive(POSITIVE_AGE_MESSAGE),
   gender: yup
     .string()
-    .oneOf([FORM_FILEDs_NAMES.GENDER_MALE, FORM_FILEDs_NAMES.GENDER_FEMALE])
-    .required(REQUIRED_MESSAGE),
+    .required(REQUIRED_MESSAGE)
+    .oneOf([FORM_FILEDs_NAMES.GENDER_MALE, FORM_FILEDs_NAMES.GENDER_FEMALE]),
   email: yup.string().email(EMAIL_MESSAGE).required(REQUIRED_MESSAGE),
   country: yup
     .string()

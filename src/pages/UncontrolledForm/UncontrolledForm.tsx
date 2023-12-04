@@ -1,4 +1,6 @@
-import { FC, useRef } from 'react';
+import { FC, useRef, useState } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { ValidationError } from 'yup';
 
 import styles from '@src/pages/UncontrolledForm/UncontrolledForm.module.css';
 
@@ -6,9 +8,17 @@ import {
   FORM_FILEDs_NAMES,
   INPUT_TYPES,
 } from '@src/pages/UncontrolledForm/types';
-import { Pages } from '@src/Router/types';
+import { Pages, Paths } from '@src/Router/types';
 
+import schema, { CustomFormData } from '@src/Validation/Validation';
 import { capitalize } from '@src/utils/StringTransform';
+import PasswordStrength from '@src/components/PasswordStrength';
+import {
+  FormsErrorMessages,
+  getFormErrorMessages,
+  getFormInputsValues,
+  initialErrors,
+} from '@src/utils/UncontrolledFormUtils';
 
 import {
   BTN_TYPE,
@@ -17,23 +27,64 @@ import {
 import Countries from '@src/components/Countries/Countries';
 
 const UncontrolledForm: FC = (): JSX.Element => {
-  const form = useRef<HTMLFormElement>(null);
+  const navigate: NavigateFunction = useNavigate();
 
-  const btnOnClick = (
+  const [errors, setErrors] = useState<FormsErrorMessages>(initialErrors);
+  const [pwStrength, setPwStrength] = useState<React.ReactNode>(undefined);
+
+  const nameInput = useRef<HTMLInputElement>(null);
+  const ageInput = useRef<HTMLInputElement>(null);
+  const maleInput = useRef<HTMLInputElement>(null);
+  const femaleInput = useRef<HTMLInputElement>(null);
+  const emailInput = useRef<HTMLInputElement>(null);
+  const countryInput = useRef<HTMLInputElement>(null);
+  const imageInput = useRef<HTMLInputElement>(null);
+  const passwordInput = useRef<HTMLInputElement>(null);
+  const repeatPasswordInput = useRef<HTMLInputElement>(null);
+  const acceptInput = useRef<HTMLInputElement>(null);
+
+  const btnOnClick = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
+  ): Promise<void> => {
     event.preventDefault();
-    if (form.current) {
-      for (const pair of new FormData(form.current).entries()) {
-        console.log(pair[0], pair[1]);
-      }
+    try {
+      const data: CustomFormData = (await schema.validate(
+        getFormInputsValues({
+          nameInput,
+          ageInput,
+          maleInput,
+          femaleInput,
+          emailInput,
+          countryInput,
+          imageInput,
+          passwordInput,
+          repeatPasswordInput,
+          acceptInput,
+        }),
+        { abortEarly: false }
+      )) as CustomFormData;
+      setPwStrength(undefined);
+      setErrors(initialErrors);
+      navigate(Paths[Pages.MAIN]);
+      console.log(data);
+    } catch (error) {
+      if (!(error instanceof ValidationError)) return;
+      const errorsObj: FormsErrorMessages = getFormErrorMessages(error);
+      setPwStrength(undefined);
+      setErrors(errorsObj);
     }
+  };
+
+  const onChangePw = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const element: React.ReactNode = PasswordStrength(event.target.value);
+    setPwStrength(element);
+    setErrors({ ...errors, password: [] });
   };
 
   return (
     <div>
       <h2 className={styles.title}>{`${Pages.UNCONTROLLED_FORM} Page`}</h2>
-      <form className={styles.form} ref={form}>
+      <form className={styles.form}>
         <div className={styles.field}>
           <label htmlFor={FORM_FILEDs_NAMES.NAME}>
             {capitalize(FORM_FILEDs_NAMES.NAME)}
@@ -42,8 +93,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.TEXT}
             id={FORM_FILEDs_NAMES.NAME}
             name={FORM_FILEDs_NAMES.NAME}
+            ref={nameInput}
           />
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.name[0]}</p>
         </div>
 
         <div className={styles.field}>
@@ -54,8 +106,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.NUMBER}
             id={FORM_FILEDs_NAMES.AGE}
             name={FORM_FILEDs_NAMES.AGE}
+            ref={ageInput}
           />
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.age[0]}</p>
         </div>
 
         <div className={styles.gender_wrapper}>
@@ -69,6 +122,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
               id={FORM_FILEDs_NAMES.GENDER_MALE}
               name={FORM_FILEDs_NAMES.GENDER}
               value={FORM_FILEDs_NAMES.GENDER_MALE}
+              ref={maleInput}
             />
           </div>
           <div className={styles.gender}>
@@ -80,9 +134,10 @@ const UncontrolledForm: FC = (): JSX.Element => {
               id={FORM_FILEDs_NAMES.GENDER_FEMALE}
               name={FORM_FILEDs_NAMES.GENDER}
               value={FORM_FILEDs_NAMES.GENDER_FEMALE}
+              ref={femaleInput}
             />
           </div>
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.gender[0]}</p>
         </div>
 
         <div className={styles.field}>
@@ -93,8 +148,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.EMAIL}
             id={FORM_FILEDs_NAMES.EMAIL}
             name={FORM_FILEDs_NAMES.EMAIL}
+            ref={emailInput}
           />
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.email[0]}</p>
         </div>
 
         <div className={styles.field}>
@@ -105,8 +161,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
             className={styles.countries_wrapper}
             id={FORM_FILEDs_NAMES.COUNTRY}
             name={FORM_FILEDs_NAMES.COUNTRY}
+            reference={countryInput}
           />
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.country[0]}</p>
         </div>
 
         <div className={styles.field}>
@@ -117,8 +174,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.FILE}
             id={FORM_FILEDs_NAMES.IMAGE}
             name={FORM_FILEDs_NAMES.IMAGE}
+            ref={imageInput}
           />
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.image[0]}</p>
         </div>
 
         <div className={styles.field}>
@@ -129,8 +187,11 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.PASSWORD}
             id={FORM_FILEDs_NAMES.PASSWORD}
             name={FORM_FILEDs_NAMES.PASSWORD}
+            ref={passwordInput}
+            onChange={onChangePw}
           />
-          <p className={styles.error}></p>
+          {pwStrength}
+          <p className={styles.error}>{errors.password[0]}</p>
         </div>
 
         <div className={styles.field}>
@@ -141,8 +202,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.PASSWORD}
             id={FORM_FILEDs_NAMES.REPEAT_PASSWORD}
             name={FORM_FILEDs_NAMES.REPEAT_PASSWORD}
+            ref={repeatPasswordInput}
           />
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.repeat_password[0]}</p>
         </div>
 
         <div className={styles.accept}>
@@ -153,8 +215,9 @@ const UncontrolledForm: FC = (): JSX.Element => {
             type={INPUT_TYPES.CHECKBOX}
             id={FORM_FILEDs_NAMES.ACCEPT_TnC}
             name={FORM_FILEDs_NAMES.ACCEPT_TnC}
+            ref={acceptInput}
           />
-          <p className={styles.error}></p>
+          <p className={styles.error}>{errors.acceptTnC[0]}</p>
         </div>
 
         <button type={BTN_TYPE} onClick={btnOnClick}>
