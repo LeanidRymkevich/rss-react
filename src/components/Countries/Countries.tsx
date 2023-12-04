@@ -26,8 +26,8 @@ const Countries: FC<CountriesProps> = (props: CountriesProps): JSX.Element => {
       onBlur: (event: React.FocusEvent<HTMLInputElement, Element>): void => {
         const input: HTMLInputElement = event.target as HTMLInputElement;
         setInputValue(input.value);
+        setTimeout((): void => setHidden(true), 200);
         registerObj.onBlur(event);
-        setTimeout((): void => setHidden(true), 100);
       },
       onChange: (event: React.ChangeEvent<HTMLInputElement>): void => {
         registerObj.onChange(event);
@@ -37,15 +37,16 @@ const Countries: FC<CountriesProps> = (props: CountriesProps): JSX.Element => {
     };
   } else {
     params = {
+      ref: props.reference,
       name: props.name,
       onBlur: (event: React.FocusEvent<HTMLInputElement, Element>): void => {
         const input: HTMLInputElement = event.target as HTMLInputElement;
         setInputValue(input.value);
-        setTimeout((): void => setHidden(true), 100);
+        console.log(input.value);
+        setTimeout((): void => setHidden(true), 200);
       },
       onChange: (event: React.ChangeEvent<HTMLInputElement>): void => {
         const input: HTMLInputElement = event.target as HTMLInputElement;
-        console.log(input.value);
         setInputValue(input.value);
       },
     };
