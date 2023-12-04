@@ -15,6 +15,7 @@ import { capitalize } from '@src/utils/StringTransform';
 import PasswordStrength from '@src/components/PasswordStrength';
 import {
   FormsErrorMessages,
+  getFormDataItem,
   getFormErrorMessages,
   getFormInputsValues,
   initialErrors,
@@ -25,9 +26,13 @@ import {
   GENDER_FIELD_TEXT,
 } from '@src/pages/UncontrolledForm/constants';
 import Countries from '@src/components/Countries/Countries';
+import { useAppDispatch } from '@src/hooks/reduxHooks';
+import { addItem } from '@src/store/FormDataSlice/FormDataSlice';
 
 const UncontrolledForm: FC = (): JSX.Element => {
   const navigate: NavigateFunction = useNavigate();
+
+  const dispatch = useAppDispatch();
 
   const [errors, setErrors] = useState<FormsErrorMessages>(initialErrors);
   const [pwStrength, setPwStrength] = useState<React.ReactNode>(undefined);
@@ -66,7 +71,7 @@ const UncontrolledForm: FC = (): JSX.Element => {
       setPwStrength(undefined);
       setErrors(initialErrors);
       navigate(Paths[Pages.MAIN]);
-      console.log(data);
+      dispatch(addItem(await getFormDataItem(data, 'Uncontrolled Form')));
     } catch (error) {
       if (!(error instanceof ValidationError)) return;
       const errorsObj: FormsErrorMessages = getFormErrorMessages(error);

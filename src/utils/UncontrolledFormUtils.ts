@@ -2,6 +2,10 @@ import { RefObject } from 'react';
 import { ValidationError } from 'yup';
 
 import { FORM_FILEDs_NAMES } from '@src/pages/UncontrolledForm/types';
+import { FormDataItem, FormType } from '@src/store/FormDataSlice/types';
+import { CustomFormData } from '@src/Validation/Validation';
+
+import { toBase64 } from '@src/utils/Base64';
 
 export interface FormInputs {
   nameInput: RefObject<HTMLInputElement>;
@@ -105,4 +109,22 @@ const hasErrors = (errorsObj: FormsErrorMessages): boolean => {
   return result;
 };
 
-export { getFormInputsValues, initialErrors, getFormErrorMessages, hasErrors };
+const getFormDataItem = async (
+  data: CustomFormData,
+  source: FormType
+): Promise<FormDataItem> => {
+  const src = data.image ? await toBase64(data.image) : '';
+  return {
+    ...data,
+    image: src,
+    source,
+  };
+};
+
+export {
+  getFormInputsValues,
+  initialErrors,
+  getFormErrorMessages,
+  hasErrors,
+  getFormDataItem,
+};

@@ -1,0 +1,36 @@
+@import url('@src/styles/variables.css');
+
+.card {
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4rem;
+  background-color: var(--header-bg);
+  border-radius: 10px;
+  height: 100%;
+}
+
+.card:first-child {
+  background-color: var(--newest-card-bg);
+}
+
+.title {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.card p {
+  margin-left: 1rem;
+}
+
+.card p span:first-child {
+  font-weight: 700;
+}
+
+.card img {
+  display: block;
+  width: 80%;
+  align-self: center;
+  margin: 1rem 0;
+  border-radius: 10px;
+}

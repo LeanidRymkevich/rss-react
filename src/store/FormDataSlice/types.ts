@@ -1,7 +1,10 @@
 import { CustomFormData } from '@src/Validation/Validation';
 
+export type FormType = 'Uncontrolled Form' | 'React Hook Form';
+
 export interface FormDataItem extends Omit<CustomFormData, 'image'> {
-  source: 'Uncontrolled Form' | 'React Hook Form';
+  source: FormType;
+  image: string;
 }
 
 export interface FormDataState {
