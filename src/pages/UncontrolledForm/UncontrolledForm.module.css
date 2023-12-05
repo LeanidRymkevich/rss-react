@@ -1,0 +1,79 @@
+@import url('@src/styles/variables.css');
+
+.title {
+  font-size: 2.0rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  font-size: 1.6rem;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+}
+
+.field input {
+  width: 73%;
+  padding: 0.3rem 1rem;
+  font-size: 1.6rem;
+}
+
+.countries_wrapper {
+  width: 73%;
+}
+
+.gender_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+}
+
+.gender_text {
+  width: 27%;
+}
+
+.gender {
+  width: 36.5%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.field input[type="file"] {
+  padding: 0;
+}
+
+.accept {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.accept label {
+  width: 27%;
+}
+
+.error {
+  position: absolute;
+  right: 0;
+  bottom: 0.3rem;
+  width: 73%;
+  margin-left: auto;
+  color: var(--link-active-color);
+  line-height: 1;
+  font-size: 1.4rem;
+}

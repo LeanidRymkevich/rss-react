@@ -1,0 +1,12 @@
+:root {
+  --primary-bg-color: #242424;
+  --primary-font-color: #ffffffde;
+  --link-color: #646cff;
+  --link-color-hover: #535bf2;
+  --link-active-color: #f10505;
+  --button-bg: #1a1a1a;
+  --header-bg: #00000080;
+  --newest-card-bg: #05051b;
+
+  --font-family:  Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
